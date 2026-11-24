@@ -1,6 +1,6 @@
 # CV Maxime DUBIN
 
-Site en ligne : https://maxpro3600.github.io/CV-Maxime-DUBIN/
+Site en ligne : [https://maxpro3600.github.io/CV-Maxime-DUBIN/](https://z-maxime-z.github.io/CV-Maxime-DUBIN/)
 
 Mon CV en ligne : une page unique (`index.html`) qui affiche mes expériences, formations, compétences, langues, certifications, projets, liens et centres d'intérêt.
 
