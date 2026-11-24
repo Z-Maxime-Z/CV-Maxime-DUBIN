@@ -1,0 +1,875 @@
+<title>Site CV</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link id="app-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap">
+<style id="app-style">
+/* Concept : CV en colonnes éditoriales. Libellés de section à gauche, contenu à droite, dates en chasse fixe. */
+:root{
+  --bg:#F4F6F7; --surface:#FFFFFF; --ink:#111B22; --muted:#56666F; --line:#DCE3E7;
+  --accent:#0C6B62; --accent-ink:#FFFFFF; --accent-soft:#DDF1EE;
+  --warn:#B26A00; --warn-soft:#FFF1D6;
+  --danger:#B3261E; --danger-ink:#FFFFFF;
+  --shadow:0 1px 2px rgba(17,27,34,.06),0 10px 30px rgba(17,27,34,.10);
+  --font-display:'Bricolage Grotesque',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-body:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1418; --surface:#141D23; --ink:#E7EDF0; --muted:#9AABB5; --line:#25323A;
+    --accent:#52C7B8; --accent-ink:#06211E; --accent-soft:#12403B;
+    --warn:#F2B04E; --warn-soft:#3A2B0E;
+    --danger:#FF8F86; --danger-ink:#3A0B08;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.45);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1418; --surface:#141D23; --ink:#E7EDF0; --muted:#9AABB5; --line:#25323A;
+  --accent:#52C7B8; --accent-ink:#06211E; --accent-soft:#12403B;
+  --warn:#F2B04E; --warn-soft:#3A2B0E;
+  --danger:#FF8F86; --danger-ink:#3A0B08;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.45);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:400 1rem/1.6 var(--font-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:16px 128px;
+}
+.wrap{max-width:62rem;margin:0 auto;display:flex;flex-direction:column;gap:2.5rem}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button{font-family:inherit}
+
+/* Barre du haut */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;min-height:40px}
+.stamp{font:500 .75rem var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tag{font:500 .75rem var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:.35rem .6rem;border-radius:6px}
+
+/* Boutons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.4rem;
+  min-height:40px;padding:.6rem 1rem;border-radius:8px;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);
+  font:600 .9rem/1.2 var(--font-body);cursor:pointer;
+}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.sm{min-height:32px;padding:.35rem .7rem;font-size:.8rem}
+.btn.ghost{background:transparent}
+.btn.danger{background:var(--danger);border-color:var(--danger);color:var(--danger-ink)}
+.btn.quiet-danger{background:transparent;border-color:transparent;color:var(--danger)}
+.btn.quiet-danger:hover{border-color:var(--danger)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* Bandeaux */
+.banner{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  padding:.9rem 1rem;border-radius:10px;border:1px solid var(--line);
+  background:var(--warn-soft);color:var(--ink);
+}
+.banner.tip{background:var(--accent-soft)}
+.banner p{margin:0;flex:1 1 18rem;font-size:.92rem}
+.banner-btns{display:flex;gap:.5rem;flex-wrap:wrap}
+
+/* En-tête */
+.hero{display:grid;grid-template-columns:auto minmax(0,1fr);gap:1.25rem 1.75rem;align-items:start}
+.avatar{
+  width:5.5rem;height:5.5rem;border-radius:20px;background:var(--accent-soft);color:var(--accent);
+  display:grid;place-items:center;font:700 2rem/1 var(--font-display);letter-spacing:.02em;
+}
+h1{margin:0;font:700 clamp(2rem,6vw,3.4rem)/1.05 var(--font-display);letter-spacing:-.02em;text-wrap:balance;overflow-wrap:anywhere}
+h1.ph{color:var(--muted)}
+.headline{margin:.5rem 0 0;font:600 clamp(1.05rem,2.4vw,1.35rem)/1.35 var(--font-display);color:var(--muted)}
+.contact{list-style:none;margin:1rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;font-size:.92rem}
+.contact li{min-width:0;overflow-wrap:anywhere}
+.sel{user-select:all}
+.copy{font:600 .72rem var(--font-mono);color:var(--accent);background:none;border:0;padding:.2rem .35rem;cursor:pointer;text-decoration:underline}
+.hero-edit{margin-top:1rem}
+@media (max-width:520px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .avatar{width:4rem;height:4rem;border-radius:16px;font-size:1.5rem}
+}
+
+/* Sections */
+.sec{display:grid;grid-template-columns:11rem minmax(0,1fr);gap:.75rem 2.5rem;padding-top:1.75rem;border-top:1px solid var(--line)}
+.sec-label{display:flex;flex-direction:column;align-items:flex-start;gap:.7rem}
+.sec-label h2{margin:0;font:500 .75rem/1.4 var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.sec-body{display:flex;flex-direction:column;gap:1.7rem;min-width:0}
+@media (max-width:720px){.sec{grid-template-columns:minmax(0,1fr)}.sec-label{flex-direction:row;align-items:center;justify-content:space-between;width:100%}}
+.about{margin:0;max-width:65ch;white-space:pre-line}
+.empty{margin:0;padding:.9rem 1rem;border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:.92rem}
+.all-empty{padding:2.5rem 1rem;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+
+/* Éléments */
+.item{
+  position:relative;display:grid;grid-template-columns:9rem minmax(0,1fr);gap:.25rem 1.5rem;
+  padding:.75rem;margin:-.75rem;border-radius:10px;border:1px dashed transparent;
+}
+.item.plain{grid-template-columns:minmax(0,1fr)}
+.edit .item{border-color:var(--line)}
+.edit .item-main{padding-right:5.5rem}
+.item-actions{position:absolute;top:.5rem;right:.5rem}
+.dates{font:500 .8rem/1.7 var(--font-mono);color:var(--muted);padding-top:.15rem}
+.lcol{font-weight:600}
+.item-main{min-width:0}
+.item h3{margin:0;font:600 1.08rem/1.35 var(--font-display);overflow-wrap:anywhere}
+.sub{margin:.1rem 0 0;color:var(--muted);font-size:.95rem}
+.bul{margin:.6rem 0 0;padding-left:1.1rem;max-width:65ch}
+.bul li{margin:.2rem 0}
+.desc{margin:.4rem 0 0;max-width:65ch;white-space:pre-line}
+.muted{color:var(--muted)}
+.lnk{color:var(--accent);overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.chip{
+  display:inline-block;padding:.25rem .6rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);
+  border-radius:6px;font:400 .88rem/1.4 var(--font-body);
+}
+.chip-btn{cursor:pointer}
+.chip-btn:hover{border-color:var(--accent)}
+@media (max-width:720px){
+  .item{grid-template-columns:minmax(0,1fr)}
+}
+
+/* Barre de modification */
+.editbar{
+  position:fixed;left:0;right:0;bottom:0;z-index:40;background:var(--surface);border-top:1px solid var(--line);
+  box-shadow:0 -8px 24px rgba(0,0,0,.08);
+  padding:.75rem max(16px,env(safe-area-inset-right,0px)) calc(.75rem + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+}
+.editbar-in{max-width:62rem;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap}
+.status{display:flex;align-items:center;gap:.55rem;font-size:.9rem;color:var(--muted)}
+.dot{width:.6rem;height:.6rem;border-radius:50%;background:var(--line)}
+.status.dirty{color:var(--ink)}
+.status.dirty .dot{background:var(--warn)}
+.btns{display:flex;gap:.5rem;flex-wrap:wrap}
+
+/* Fenêtre de saisie */
+.ov{
+  position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(8,14,18,.55);
+  padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+}
+.modal{
+  width:100%;max-width:36rem;max-height:100%;display:flex;flex-direction:column;
+  background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);
+}
+.modal-h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:1rem 1.25rem;border-bottom:1px solid var(--line)}
+.modal-h h2{margin:0;font:600 1.15rem/1.3 var(--font-display)}
+.modal-form{display:flex;flex-direction:column;min-height:0;flex:1}
+.modal-b{padding:1.25rem;overflow:auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;align-content:start}
+.fld{grid-column:1 / -1;display:flex;flex-direction:column;gap:.35rem;min-width:0}
+.fld.half{grid-column:auto}
+@media (max-width:520px){.modal-b{grid-template-columns:minmax(0,1fr)}.fld.half{grid-column:1 / -1}}
+.fld label{font:600 .85rem/1.3 var(--font-body)}
+.req{color:var(--danger);margin-left:.15rem}
+.fld input[type="text"],.fld textarea,.fld select{
+  width:100%;min-height:42px;padding:.6rem .75rem;border:1px solid var(--line);border-radius:8px;
+  background:var(--bg);color:var(--ink);font:400 1rem/1.4 var(--font-body);
+}
+.fld textarea{min-height:7.5rem;resize:vertical}
+.fld input:focus,.fld textarea:focus,.fld select:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.fld.invalid input[type="text"],.fld.invalid textarea,.fld.invalid select{border-color:var(--danger)}
+.fld select:disabled{opacity:.5}
+.mp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.5rem}
+.hint{margin:0;color:var(--muted);font-size:.82rem}
+.err{margin:0;color:var(--danger);font-size:.85rem}
+.fld.chk label{display:flex;align-items:center;gap:.6rem;font-weight:500;font-size:.95rem}
+.fld.chk input{width:1.15rem;height:1.15rem;accent-color:var(--accent);margin:0}
+.modal-f{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;padding:1rem 1.25rem;border-top:1px solid var(--line)}
+.del-zone{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;font-size:.9rem}
+.f-actions{display:flex;gap:.5rem;margin-left:auto}
+
+.toast{
+  position:fixed;left:50%;transform:translateX(-50%);bottom:calc(5.5rem + env(safe-area-inset-bottom,0px));z-index:60;
+  max-width:calc(100% - 32px);padding:.7rem 1rem;border-radius:10px;background:var(--ink);color:var(--bg);
+  font-size:.9rem;box-shadow:var(--shadow);text-align:center;
+}
+</style>
+<div id="app" class="wrap"></div>
+<script type="application/json" id="cv-data">{"v":1,"example":true,"updatedAt":"","profile":{"name":"Camille Martin","headline":"Chargée de projet digital","location":"Lyon","phone":"06 12 34 56 78","email":"camille.martin@exemple.fr","summary":"Chargée de projet digital avec 6 ans d’expérience dans la conduite de sites web et d’outils internes. J’aime transformer un besoin flou en un produit simple, livré à temps et utilisé par les équipes.\nJe cherche un poste de cheffe de projet digital au sein d’une équipe produit."},"experiences":[{"id":"e1","role":"Chargée de projet digital","org":"Atelier Rhône","place":"Lyon","start":"2022-03","current":true,"desc":"Pilotage de la refonte du site (12 000 visiteurs par mois), livrée en 4 mois\nCoordination de 5 personnes entre design, développement et contenu\nMise en place d’un tableau de bord qui a réduit de 30 % les demandes au support"},{"id":"e2","role":"Assistante cheffe de projet","org":"Studio Pixel","place":"Villeurbanne","start":"2019-09","end":"2022-02","desc":"Rédaction des cahiers des charges pour 15 projets clients\nSuivi des plannings et des budgets dans un outil de gestion de projet"},{"id":"e3","role":"Stagiaire communication","org":"Office de tourisme du Vercors","place":"Villard-de-Lans","start":"2019-02","end":"2019-07","desc":"Animation des réseaux sociaux et rédaction de la lettre d’information"}],"education":[{"id":"d1","degree":"Master Communication et médias numériques","org":"Université de Lyon","place":"Lyon","start":"2017","end":"2019","desc":"Mention bien\nMémoire sur l’accessibilité des services publics en ligne"},{"id":"d2","degree":"Licence Information-Communication","org":"Université de Grenoble","place":"Grenoble","start":"2014","end":"2017"}],"skills":[{"id":"s1","group":"Gestion de projet","items":"Planification, Cahier des charges, Budgets, Méthodes agiles"},{"id":"s2","group":"Outils","items":"Notion, Figma, Google Analytics, WordPress"},{"id":"s3","group":"Communication","items":"Rédaction web, Animation d’équipe, Présentation client"}],"languages":[{"id":"l1","name":"Français","level":"Langue maternelle"},{"id":"l2","name":"Anglais","level":"Courant"},{"id":"l3","name":"Espagnol","level":"Intermédiaire"}],"certifications":[{"id":"c1","name":"Professional Scrum Master I","org":"Scrum.org","date":"2021-05"}],"projects":[{"id":"p1","name":"Annuaire des associations de quartier","link":"https://example.org/annuaire","desc":"Site bénévole qui recense 80 associations, mis à jour directement par leurs responsables."}],"links":[{"id":"k1","label":"Site personnel","url":"https://example.org/camille"}],"interests":[{"id":"t1","name":"Randonnée"},{"id":"t2","name":"Photographie"},{"id":"t3","name":"Cuisine du monde"}]}</script>
+<script id="app-code">
+(function(){
+'use strict';
+
+/* ---------- Utilitaires ---------- */
+const $=(s,r)=>(r||document).querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clone=o=>JSON.parse(JSON.stringify(o));
+const uid=()=>'i'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const pad=n=>String(n).padStart(2,'0');
+
+const MS=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+const ML=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+const LEVELS=['Langue maternelle','Bilingue','Courant','Avancé','Intermédiaire','Notions'];
+const DRE=/^(\d{4})(?:-(\d{2}))?$/;
+
+const fmtDate=v=>{const m=DRE.exec(v||'');if(!m)return '';return m[2]?(MS[+m[2]-1]||'')+' '+m[1]:m[1];};
+const dkey=v=>{const m=DRE.exec(v||'');return m?m[1]+'-'+(m[2]||'00'):'';};
+function range(it){
+  const s=fmtDate(it.start),e=it.current?'Aujourd’hui':fmtDate(it.end);
+  if(s&&e)return s+' – '+e;
+  return s||e||'';
+}
+function fmtLong(iso){
+  const d=new Date(iso);
+  if(isNaN(d.getTime()))return '';
+  try{return d.toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});}catch(e){return '';}
+}
+const lines=t=>String(t||'').split(/\r?\n/).map(s=>s.replace(/^\s*[-•*–]\s*/,'').trim()).filter(Boolean);
+const bul=t=>{const l=lines(t);return l.length?'<ul class="bul">'+l.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'';};
+const splitList=t=>String(t||'').split(/[,;\n]/).map(s=>s.trim()).filter(Boolean);
+function normUrl(v){
+  v=String(v||'').trim();
+  if(!v)return '';
+  if(!/^[a-z][a-z0-9+.-]*:/i.test(v))v='https://'+v;
+  try{
+    const u=new URL(v);
+    if(u.protocol!=='https:'&&u.protocol!=='http:')return null;
+    if(u.hostname.indexOf('.')<0)return null;
+    return u.href;
+  }catch(e){return null;}
+}
+const isHttp=u=>/^https?:\/\//i.test(u||'');
+const shortUrl=u=>String(u||'').replace(/^https?:\/\//i,'').replace(/\/$/,'');
+function initials(n){
+  const p=String(n||'').trim().split(/\s+/).filter(Boolean);
+  if(!p.length)return '·';
+  const a=Array.from(p[0])[0]||'';
+  const b=p.length>1?(Array.from(p[p.length-1])[0]||''):'';
+  return (a+b).toUpperCase();
+}
+function linkHTML(u){
+  return isHttp(u)?'<a class="lnk" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(shortUrl(u))+'</a>':esc(u);
+}
+
+/* ---------- Schéma des sections ---------- */
+const PROFILE={key:'profile',editT:'Modifier le profil',fields:[
+  {k:'name',label:'Nom complet',type:'text',required:true,ph:'Prénom Nom'},
+  {k:'headline',label:'Titre professionnel',type:'text',ph:'Ex. Chargée de projet digital'},
+  {k:'location',label:'Ville',type:'text',half:true,ph:'Ex. Lyon'},
+  {k:'phone',label:'Téléphone',type:'text',half:true,ph:'Ex. 06 12 34 56 78'},
+  {k:'email',label:'E-mail',type:'email',ph:'prenom.nom@exemple.fr'},
+  {k:'summary',label:'Présentation',type:'area',hint:'Quelques lignes : qui vous êtes, ce que vous cherchez.'}
+]};
+const PROFILE_KEYS=PROFILE.fields.map(f=>f.k);
+
+const SECTIONS=[
+  {key:'experiences',title:'Expériences',layout:'timeline',dated:true,add:'Ajouter une expérience',addT:'Nouvelle expérience',editT:'Modifier l’expérience',
+    empty:'Ajoutez votre poste le plus récent, puis remontez dans le temps.',label:it=>it.role||'expérience',head:it=>it.role,
+    fields:[
+      {k:'role',label:'Poste',type:'text',required:true,ph:'Ex. Chargé de communication'},
+      {k:'org',label:'Entreprise ou organisation',type:'text',required:true},
+      {k:'place',label:'Lieu',type:'text',ph:'Ex. Lyon'},
+      {k:'start',label:'Début',type:'month',required:true,half:true},
+      {k:'end',label:'Fin',type:'month',half:true},
+      {k:'current',label:'Je suis toujours en poste',type:'check'},
+      {k:'desc',label:'Missions et réalisations',type:'area',hint:'Un point par ligne. Les chiffres et les résultats concrets font la différence.'}
+    ]},
+  {key:'education',title:'Formation',layout:'timeline',dated:true,add:'Ajouter une formation',addT:'Nouvelle formation',editT:'Modifier la formation',
+    empty:'Ajoutez un diplôme ou une formation.',label:it=>it.degree||'formation',head:it=>it.degree,
+    fields:[
+      {k:'degree',label:'Diplôme ou formation',type:'text',required:true},
+      {k:'org',label:'Établissement',type:'text',required:true},
+      {k:'place',label:'Lieu',type:'text'},
+      {k:'start',label:'Début',type:'month',half:true},
+      {k:'end',label:'Fin',type:'month',half:true},
+      {k:'current',label:'Formation en cours',type:'check'},
+      {k:'desc',label:'Détails',type:'area',hint:'Option, mention, matières… un point par ligne.'}
+    ]},
+  {key:'skills',title:'Compétences',layout:'skills',add:'Ajouter une catégorie de compétences',addT:'Nouvelle catégorie',editT:'Modifier la catégorie',
+    empty:'Regroupez vos compétences par catégorie (outils, techniques, savoir-faire).',label:it=>it.group||'compétences',
+    fields:[
+      {k:'group',label:'Catégorie',type:'text',required:true,ph:'Ex. Outils'},
+      {k:'items',label:'Compétences',type:'area',required:true,hint:'Séparez-les par des virgules.'}
+    ]},
+  {key:'languages',title:'Langues',layout:'languages',add:'Ajouter une langue',addT:'Nouvelle langue',editT:'Modifier la langue',
+    empty:'Ajoutez les langues que vous parlez.',label:it=>it.name||'langue',
+    fields:[
+      {k:'name',label:'Langue',type:'text',required:true,ph:'Ex. Anglais'},
+      {k:'level',label:'Niveau',type:'select',options:LEVELS,def:'Courant'}
+    ]},
+  {key:'certifications',title:'Certifications',layout:'certs',add:'Ajouter une certification',addT:'Nouvelle certification',editT:'Modifier la certification',
+    empty:'Ajoutez une certification ou une formation courte.',label:it=>it.name||'certification',
+    fields:[
+      {k:'name',label:'Intitulé',type:'text',required:true},
+      {k:'org',label:'Organisme',type:'text'},
+      {k:'date',label:'Date d’obtention',type:'month'}
+    ]},
+  {key:'projects',title:'Projets',layout:'projects',add:'Ajouter un projet',addT:'Nouveau projet',editT:'Modifier le projet',
+    empty:'Ajoutez un projet personnel, associatif ou professionnel.',label:it=>it.name||'projet',
+    fields:[
+      {k:'name',label:'Nom du projet',type:'text',required:true},
+      {k:'link',label:'Lien',type:'url',ph:'Ex. monprojet.fr'},
+      {k:'desc',label:'Description',type:'area'}
+    ]},
+  {key:'links',title:'Liens',layout:'links',add:'Ajouter un lien',addT:'Nouveau lien',editT:'Modifier le lien',
+    empty:'LinkedIn, portfolio, site personnel…',label:it=>it.label||'lien',
+    fields:[
+      {k:'label',label:'Nom du lien',type:'text',required:true,ph:'Ex. LinkedIn'},
+      {k:'url',label:'Adresse',type:'url',required:true,ph:'Ex. linkedin.com/in/votre-nom'}
+    ]},
+  {key:'interests',title:'Centres d’intérêt',layout:'chips',add:'Ajouter un centre d’intérêt',addT:'Nouveau centre d’intérêt',editT:'Modifier le centre d’intérêt',
+    empty:'Ajoutez ce qui vous passionne en dehors du travail.',label:it=>it.name||'centre d’intérêt',
+    fields:[{k:'name',label:'Centre d’intérêt',type:'text',required:true}]}
+];
+
+/* ---------- État ---------- */
+function normalize(s){
+  const o=Object.assign({v:1,example:false,updatedAt:''},s||{});
+  const base={};PROFILE_KEYS.forEach(k=>{base[k]='';});
+  o.profile=Object.assign(base,o.profile&&typeof o.profile==='object'?o.profile:{});
+  SECTIONS.forEach(sec=>{
+    if(!Array.isArray(o[sec.key]))o[sec.key]=[];
+    o[sec.key]=o[sec.key].filter(x=>x&&typeof x==='object').map(x=>x.id?x:Object.assign({id:uid()},x));
+  });
+  return o;
+}
+let saved;
+try{saved=normalize(JSON.parse($('#cv-data').textContent));}catch(e){saved=normalize({});}
+let savedJSON=JSON.stringify(saved);
+let state=clone(saved);
+let editing=false,canEdit=false,saving=false,confirmDiscard=false,draft=null;
+let api=null,modal=null,focusSels=null,discardTimer=0;
+const isDirty=()=>JSON.stringify(state)!==savedJSON;
+
+function sortDated(arr){
+  const endKey=a=>a.current?'9999-99':(dkey(a.end)||dkey(a.start));
+  arr.sort((a,b)=>{
+    const ea=endKey(a),eb=endKey(b);
+    if(ea!==eb)return ea<eb?1:-1;
+    const sa=dkey(a.start),sb=dkey(b.start);
+    if(sa!==sb)return sa<sb?1:-1;
+    return 0;
+  });
+}
+
+/* Brouillon local (sécurité si la page se ferme avant l’enregistrement) */
+const DKEY='sitecv-draft-v1';
+function persistDraft(){
+  try{
+    if(!isDirty()){localStorage.removeItem(DKEY);return;}
+    localStorage.setItem(DKEY,JSON.stringify({base:saved.updatedAt||'',state:state}));
+  }catch(e){}
+}
+function readDraft(){
+  try{
+    const raw=localStorage.getItem(DKEY);
+    if(!raw)return null;
+    const d=JSON.parse(raw);
+    return d&&d.state&&typeof d.state==='object'?d:null;
+  }catch(e){return null;}
+}
+function clearDraft(){try{localStorage.removeItem(DKEY);}catch(e){}}
+
+/* ---------- Message court ---------- */
+let toastEl=null,toastT=0;
+function toast(msg){
+  if(!toastEl){
+    toastEl=document.createElement('div');
+    toastEl.className='toast';
+    toastEl.setAttribute('role','status');
+    toastEl.setAttribute('aria-live','polite');
+    document.body.appendChild(toastEl);
+  }
+  toastEl.textContent=msg;
+  toastEl.hidden=false;
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>{toastEl.hidden=true;},3600);
+}
+
+/* ---------- Affichage ---------- */
+function refocus(){
+  if(!focusSels)return;
+  for(const s of focusSels){
+    const el=$(s);
+    if(el){try{el.focus();}catch(e){}break;}
+  }
+  focusSels=null;
+}
+
+function topbarHTML(){
+  let left='CV';
+  if(saved.example)left='Exemple de CV';
+  else if(saved.updatedAt&&fmtLong(saved.updatedAt))left='Mis à jour le '+fmtLong(saved.updatedAt);
+  let right='';
+  if(canEdit&&!editing)right='<button type="button" class="btn primary" data-action="enter-edit">Modifier mon CV</button>';
+  if(editing)right='<span class="tag">Mode modification</span>';
+  return '<div class="top"><span class="stamp">'+esc(left)+'</span>'+right+'</div>';
+}
+
+function bannersHTML(){
+  let h='';
+  if(canEdit&&draft&&!editing){
+    h+='<div class="banner" role="status"><p>Un brouillon non enregistré a été retrouvé sur cet appareil.</p><div class="banner-btns">'+
+       '<button type="button" class="btn sm primary" data-action="restore-draft">Reprendre le brouillon</button>'+
+       '<button type="button" class="btn sm" data-action="ignore-draft">Ignorer</button></div></div>';
+  }
+  if(canEdit&&state.example){
+    h+='<div class="banner"><p>Ce CV est un exemple fictif. Remplacez chaque élément avec les boutons « Modifier », ou effacez tout pour repartir d’une page vierge.'+(editing?' Rien n’est publié tant que vous n’avez pas cliqué sur « Enregistrer ».':'')+'</p><div class="banner-btns">'+
+       (editing?'':'<button type="button" class="btn sm primary" data-action="enter-edit">Commencer à modifier</button>')+
+       '<button type="button" class="btn sm" data-action="reset-empty">Repartir de zéro</button></div></div>';
+  }else if(editing){
+    h+='<div class="banner tip"><p>Utilisez « Ajouter » dans chaque section, ou « Modifier » à côté d’un élément. Rien n’est publié tant que vous n’avez pas cliqué sur « Enregistrer ».</p></div>';
+  }
+  return h;
+}
+
+function heroHTML(){
+  const p=state.profile;
+  const name=p.name?esc(p.name):(editing?'Votre nom':'Mon CV');
+  const c=[];
+  if(p.location)c.push('<li>'+esc(p.location)+'</li>');
+  if(p.email)c.push('<li><span class="sel">'+esc(p.email)+'</span><button type="button" class="copy" data-action="copy" data-v="'+esc(p.email)+'" aria-label="Copier l’adresse e-mail">Copier</button></li>');
+  if(p.phone)c.push('<li><span class="sel">'+esc(p.phone)+'</span><button type="button" class="copy" data-action="copy" data-v="'+esc(p.phone)+'" aria-label="Copier le numéro de téléphone">Copier</button></li>');
+  return '<header class="hero"><div class="avatar" aria-hidden="true">'+esc(initials(p.name))+'</div><div>'+
+    '<h1'+(p.name?'':' class="ph"')+'>'+name+'</h1>'+
+    (p.headline?'<p class="headline">'+esc(p.headline)+'</p>':'')+
+    (c.length?'<ul class="contact">'+c.join('')+'</ul>':'')+
+    (editing?'<div class="hero-edit"><button type="button" class="btn sm" data-action="edit-profile">Modifier le profil</button></div>':'')+
+    '</div></header>';
+}
+
+function itemHTML(sec,it){
+  const lab=esc(sec.label(it));
+  const btn=editing?'<button type="button" class="btn sm ghost item-actions" data-action="edit" data-section="'+sec.key+'" data-id="'+esc(it.id)+'" aria-label="Modifier : '+lab+'">Modifier</button>':'';
+  switch(sec.layout){
+    case 'timeline':{
+      const sub=[it.org,it.place].filter(Boolean).join(' · ');
+      return '<article class="item"><div class="dates">'+esc(range(it))+'</div><div class="item-main"><h3>'+esc(sec.head(it))+'</h3>'+(sub?'<p class="sub">'+esc(sub)+'</p>':'')+bul(it.desc)+'</div>'+btn+'</article>';
+    }
+    case 'skills':
+      return '<article class="item"><div class="lcol">'+esc(it.group)+'</div><div class="item-main"><div class="chips">'+splitList(it.items).map(x=>'<span class="chip">'+esc(x)+'</span>').join('')+'</div></div>'+btn+'</article>';
+    case 'languages':
+      return '<article class="item"><div class="lcol">'+esc(it.name)+'</div><div class="item-main muted">'+esc(it.level||'')+'</div>'+btn+'</article>';
+    case 'certs':
+      return '<article class="item"><div class="dates">'+esc(fmtDate(it.date))+'</div><div class="item-main"><h3>'+esc(it.name)+'</h3>'+(it.org?'<p class="sub">'+esc(it.org)+'</p>':'')+'</div>'+btn+'</article>';
+    case 'projects':
+      return '<article class="item plain"><div class="item-main"><h3>'+esc(it.name)+'</h3>'+(it.link?'<p class="sub">'+linkHTML(it.link)+'</p>':'')+(it.desc?'<p class="desc">'+esc(lines(it.desc).join('\n'))+'</p>':'')+'</div>'+btn+'</article>';
+    case 'links':
+      return '<article class="item"><div class="lcol">'+esc(it.label)+'</div><div class="item-main">'+linkHTML(it.url)+'</div>'+btn+'</article>';
+  }
+  return '';
+}
+
+function sectionsHTML(){
+  let h='';
+  const p=state.profile;
+  if(p.summary||editing){
+    h+='<section class="sec" aria-labelledby="h-about"><div class="sec-label"><h2 id="h-about">Profil</h2>'+
+       (editing?'<button type="button" class="btn sm" data-action="edit-profile" aria-label="Modifier la présentation">Modifier</button>':'')+
+       '</div><div class="sec-body">'+(p.summary?'<p class="about">'+esc(p.summary)+'</p>':'<p class="empty">Ajoutez une courte présentation : qui vous êtes, ce que vous cherchez.</p>')+'</div></section>';
+  }
+  let any=!!(p.summary||p.name||p.headline);
+  SECTIONS.forEach(sec=>{
+    const items=state[sec.key];
+    if(items.length)any=true;
+    if(!items.length&&!editing)return;
+    let body;
+    if(!items.length)body='<p class="empty">'+esc(sec.empty)+'</p>';
+    else if(sec.layout==='chips'){
+      body='<div class="chips">'+items.map(it=>editing
+        ?'<button type="button" class="chip chip-btn" data-action="edit" data-section="'+sec.key+'" data-id="'+esc(it.id)+'" aria-label="Modifier : '+esc(sec.label(it))+'">'+esc(it.name)+'</button>'
+        :'<span class="chip">'+esc(it.name)+'</span>').join('')+'</div>';
+    }else body=items.map(it=>itemHTML(sec,it)).join('');
+    h+='<section class="sec" aria-labelledby="h-'+sec.key+'"><div class="sec-label"><h2 id="h-'+sec.key+'">'+esc(sec.title)+'</h2>'+
+       (editing?'<button type="button" class="btn sm" data-action="add" data-section="'+sec.key+'" aria-label="'+esc(sec.add)+'">+ Ajouter</button>':'')+
+       '</div><div class="sec-body">'+body+'</div></section>';
+  });
+  if(!any&&!editing)h='<div class="all-empty">Ce CV est en cours de rédaction.</div>';
+  return h;
+}
+
+function editbarHTML(){
+  const d=isDirty();
+  const status=saving?'Enregistrement…':(d?'Modifications non enregistrées':'Aucune modification');
+  let btns='';
+  if(d)btns+='<button type="button" class="btn" data-action="discard"'+(saving?' disabled':'')+'>'+(confirmDiscard?'Confirmer l’annulation':'Annuler les modifications')+'</button>';
+  else btns+='<button type="button" class="btn" data-action="finish"'+(saving?' disabled':'')+'>Terminer</button>';
+  btns+='<button type="button" class="btn primary" data-action="save"'+((!d||saving)?' disabled':'')+'>Enregistrer</button>';
+  return '<div class="editbar" role="region" aria-label="Barre de modification"><div class="editbar-in"><span class="status'+(d?' dirty':'')+'" aria-live="polite"><span class="dot" aria-hidden="true"></span>'+status+'</span><div class="btns">'+btns+'</div></div></div>';
+}
+
+function render(){
+  if(editing&&!canEdit)editing=false;
+  const app=$('#app');
+  if(!app)return;
+  app.className=editing?'wrap edit':'wrap';
+  app.innerHTML=topbarHTML()+bannersHTML()+heroHTML()+sectionsHTML()+(editing?editbarHTML():'');
+  refocus();
+}
+
+/* ---------- Formulaire (fenêtre) ---------- */
+function fieldHTML(f,val){
+  const id='f-'+f.k;
+  const req=f.required?'<span class="req" aria-hidden="true">*</span>':'';
+  const hint=f.hint?'<p class="hint" id="'+id+'-h">'+esc(f.hint)+'</p>':'';
+  const err='<p class="err" id="'+id+'-e" role="alert" hidden></p>';
+  const cls='fld'+(f.half?' half':'')+(f.type==='check'?' chk':'');
+  let ctl='';
+  if(f.type==='check'){
+    return '<div class="'+cls+'" data-k="'+f.k+'"><label for="'+id+'"><input id="'+id+'" type="checkbox"'+(val?' checked':'')+'> '+esc(f.label)+'</label></div>';
+  }
+  if(f.type==='month'){
+    const m=DRE.exec(val||'');
+    const yy=m?m[1]:'',mm=m&&m[2]?m[2]:'';
+    const now=new Date().getFullYear();
+    let ys='<option value="">Année</option>';
+    const years=[];
+    for(let y=now+1;y>=1970;y--)years.push(String(y));
+    if(yy&&years.indexOf(yy)<0)years.push(yy);
+    years.forEach(y=>{ys+='<option value="'+y+'"'+(y===yy?' selected':'')+'>'+y+'</option>';});
+    let ms='<option value="">Mois (facultatif)</option>';
+    ML.forEach((n,i)=>{ms+='<option value="'+pad(i+1)+'"'+(pad(i+1)===mm?' selected':'')+'>'+n+'</option>';});
+    ctl='<div class="mp"><select id="'+id+'-m" aria-label="'+esc(f.label)+' : mois">'+ms+'</select><select id="'+id+'-y" aria-label="'+esc(f.label)+' : année">'+ys+'</select></div>';
+    return '<div class="'+cls+'" data-k="'+f.k+'"><label for="'+id+'-y">'+esc(f.label)+req+'</label>'+ctl+hint+err+'</div>';
+  }
+  if(f.type==='area'){
+    ctl='<textarea id="'+id+'" rows="5" aria-describedby="'+id+'-h '+id+'-e">'+esc(val)+'</textarea>';
+  }else if(f.type==='select'){
+    ctl='<select id="'+id+'">'+f.options.map(o=>'<option'+(o===(val||f.def)?' selected':'')+'>'+esc(o)+'</option>').join('')+'</select>';
+  }else{
+    const extra=f.type==='url'?' inputmode="url" autocapitalize="off" spellcheck="false"':(f.type==='email'?' inputmode="email" autocapitalize="off" spellcheck="false"':'');
+    ctl='<input id="'+id+'" type="text" autocomplete="off"'+extra+' value="'+esc(val)+'" placeholder="'+esc(f.ph||'')+'" aria-describedby="'+id+'-h '+id+'-e">';
+  }
+  return '<div class="'+cls+'" data-k="'+f.k+'"><label for="'+id+'">'+esc(f.label)+req+'</label>'+ctl+hint+err+'</div>';
+}
+
+function readField(f){
+  const id='f-'+f.k;
+  if(f.type==='check')return {val:$('#'+id).checked};
+  if(f.type==='month'){
+    const y=$('#'+id+'-y').value,m=$('#'+id+'-m').value;
+    if(!y)return m?{val:'',err:'Choisissez aussi l’année.'}:{val:''};
+    return {val:m?y+'-'+m:y};
+  }
+  let v=$('#'+id).value.replace(/\r\n/g,'\n');
+  v=f.type==='area'?v.trim():v.trim();
+  if(f.type==='url'){
+    const u=normUrl(v);
+    if(u===null)return {val:v,err:'Adresse invalide. Exemple : monsite.fr'};
+    return {val:u};
+  }
+  if(f.type==='email'&&v&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v))return {val:v,err:'Adresse e-mail invalide.'};
+  return {val:v};
+}
+
+function validate(def,vals,errs){
+  if(def.dated&&vals.current)delete errs.end;
+  def.fields.forEach(f=>{
+    if(errs[f.k]||!f.required||f.type==='check')return;
+    if(!String(vals[f.k]||'').trim())errs[f.k]=f.type==='month'?'Indiquez au moins l’année.':'Ce champ est obligatoire.';
+  });
+  if(def.dated){
+    if(vals.current)vals.end='';
+    else if(def.key==='experiences'&&!vals.end&&!errs.end)errs.end='Indiquez la date de fin, ou cochez « Je suis toujours en poste ».';
+    if(vals.start&&vals.end&&!errs.end&&dkey(vals.end)<dkey(vals.start))errs.end='La fin ne peut pas précéder le début.';
+  }
+}
+
+function showErrors(errs){
+  if(!modal)return;
+  modal.def.fields.forEach(f=>{
+    const box=$('[data-k="'+f.k+'"]',modal.ov);
+    if(!box)return;
+    const p=$('.err',box);
+    const msg=errs[f.k];
+    box.classList.toggle('invalid',!!msg);
+    if(p){p.hidden=!msg;p.textContent=msg||'';}
+    box.querySelectorAll('input,select,textarea').forEach(el=>{
+      if(msg)el.setAttribute('aria-invalid','true');else el.removeAttribute('aria-invalid');
+    });
+  });
+}
+
+function syncCurrent(){
+  if(!modal)return;
+  const cur=$('#f-current',modal.ov),end=$('#f-end-m',modal.ov),endY=$('#f-end-y',modal.ov);
+  if(!cur||!end||!endY)return;
+  end.disabled=cur.checked;endY.disabled=cur.checked;
+}
+
+function openForm(secKey,id,trigger){
+  const isProfile=secKey==='profile';
+  const def=isProfile?PROFILE:SECTIONS.find(s=>s.key===secKey);
+  if(!def)return;
+  const item=isProfile?state.profile:(id?state[secKey].find(x=>x.id===id):null);
+  if(!isProfile&&id&&!item)return;
+  closeForm(true);
+  const title=isProfile||id?def.editT:def.addT;
+  const body=def.fields.map(f=>{
+    let v=item?item[f.k]:'';
+    if(v==null)v='';
+    return fieldHTML(f,v);
+  }).join('');
+  const del=(!isProfile&&id)?'<div class="del-zone" id="del-zone"><button type="button" class="btn quiet-danger" data-m="ask-del">Supprimer</button></div>':'<div></div>';
+  const ov=document.createElement('div');
+  ov.className='ov';
+  ov.innerHTML='<div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">'+
+    '<div class="modal-h"><h2 id="m-title">'+esc(title)+'</h2><button type="button" class="btn sm ghost" data-m="close">Fermer</button></div>'+
+    '<form class="modal-form" novalidate><div class="modal-b">'+body+'</div>'+
+    '<div class="modal-f">'+del+'<div class="f-actions"><button type="button" class="btn" data-m="close">Annuler</button><button type="submit" class="btn primary">'+(isProfile||id?'Valider':'Ajouter')+'</button></div></div></form></div>';
+  document.body.appendChild(ov);
+  document.body.style.overflow='hidden';
+  const sels=[];
+  if(trigger&&trigger.dataset){
+    const d=trigger.dataset;
+    if(d.action==='edit')sels.push('[data-action="edit"][data-section="'+d.section+'"][data-id="'+d.id+'"]');
+    if(d.section)sels.push('[data-action="add"][data-section="'+d.section+'"]');
+    if(d.action==='edit-profile')sels.push('[data-action="edit-profile"]');
+  }
+  modal={ov:ov,def:def,secKey:secKey,id:id||null,isProfile:isProfile};
+  focusSels=sels.length?sels:null;
+  ov.addEventListener('click',onModalClick);
+  ov.addEventListener('keydown',onModalKey);
+  $('form',ov).addEventListener('submit',e=>{e.preventDefault();submitForm();});
+  const cur=$('#f-current',ov);
+  if(cur)cur.addEventListener('change',syncCurrent);
+  syncCurrent();
+  const first=$('input[type="text"],textarea,select,input',$('.modal-b',ov));
+  if(first)first.focus();
+}
+
+function closeForm(keepFocus){
+  if(!modal)return;
+  modal.ov.remove();
+  modal=null;
+  document.body.style.overflow='';
+  if(!keepFocus)refocus();
+}
+
+function onModalClick(e){
+  const b=e.target.closest('[data-m]');
+  if(!b||!modal)return;
+  const a=b.dataset.m;
+  if(a==='close'){closeForm();return;}
+  if(a==='ask-del'){
+    const z=$('#del-zone',modal.ov);
+    z.innerHTML='<span>Supprimer cet élément ?</span><button type="button" class="btn danger" data-m="del-yes">Oui, supprimer</button><button type="button" class="btn" data-m="del-no">Non</button>';
+    const no=$('[data-m="del-no"]',z);
+    if(no)no.focus();
+    return;
+  }
+  if(a==='del-no'){
+    const z=$('#del-zone',modal.ov);
+    z.innerHTML='<button type="button" class="btn quiet-danger" data-m="ask-del">Supprimer</button>';
+    const ask=$('[data-m="ask-del"]',z);
+    if(ask)ask.focus();
+    return;
+  }
+  if(a==='del-yes'){
+    const key=modal.secKey,id=modal.id;
+    state[key]=state[key].filter(x=>x.id!==id);
+    focusSels=['[data-action="add"][data-section="'+key+'"]'];
+    afterChange('Élément supprimé.');
+  }
+}
+
+function onModalKey(e){
+  if(e.key==='Escape'){e.preventDefault();closeForm();return;}
+  if(e.key!=='Tab'||!modal)return;
+  const list=Array.from(modal.ov.querySelectorAll('button,input,select,textarea,a[href]')).filter(el=>!el.disabled&&el.offsetParent!==null);
+  if(!list.length)return;
+  const first=list[0],last=list[list.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+}
+
+function submitForm(){
+  if(!modal)return;
+  const def=modal.def;
+  const vals={},errs={};
+  def.fields.forEach(f=>{
+    const r=readField(f);
+    vals[f.k]=r.val;
+    if(r.err)errs[f.k]=r.err;
+  });
+  validate(def,vals,errs);
+  showErrors(errs);
+  const bad=def.fields.find(f=>errs[f.k]);
+  if(bad){
+    const box=$('[data-k="'+bad.k+'"]',modal.ov);
+    const el=box&&box.querySelector('input:not(:disabled),select:not(:disabled),textarea');
+    if(el)el.focus();
+    return;
+  }
+  if(modal.isProfile){
+    const p={};
+    PROFILE_KEYS.forEach(k=>{p[k]=vals[k]||'';});
+    state.profile=p;
+    afterChange('Profil mis à jour.');
+    return;
+  }
+  const id=modal.id;
+  const item={id:id||uid()};
+  def.fields.forEach(f=>{
+    const v=vals[f.k];
+    if(f.type==='check'){if(v)item[f.k]=true;}
+    else if(String(v||'').trim())item[f.k]=v;
+  });
+  const arr=state[def.key];
+  if(id){
+    const i=arr.findIndex(x=>x.id===id);
+    if(i>-1)arr[i]=item;else arr.push(item);
+  }else arr.push(item);
+  if(def.dated)sortDated(arr);
+  focusSels=['[data-action="edit"][data-section="'+def.key+'"][data-id="'+item.id+'"]','[data-action="add"][data-section="'+def.key+'"]'];
+  afterChange(id?'Modification prise en compte.':'Élément ajouté.');
+}
+
+function afterChange(msg){
+  closeForm(true);
+  persistDraft();
+  render();
+  toast(msg);
+}
+
+/* ---------- Enregistrement ---------- */
+const RESET=':root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}';
+const SKEL='<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>'+RESET+'</style></head><body>';
+const SC='</scr'+'ipt>';
+function buildDoc(s){
+  const css=$('#app-style').textContent;
+  const code=$('#app-code').textContent;
+  const fonts=$('#app-fonts').getAttribute('href');
+  const json=JSON.stringify(s).replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
+  return SKEL+
+    '<title>Site CV</title>'+
+    '<meta name="claude:viewport-fit-sides" content="cover">'+
+    '<link id="app-fonts" rel="stylesheet" href="'+esc(fonts)+'">'+
+    '<style id="app-style">'+css+'</style>'+
+    '<div id="app" class="wrap"></div>'+
+    '<script type="application/json" id="cv-data">'+json+SC+
+    '<script id="app-code">'+code+SC+
+    '</body></html>';
+}
+
+async function save(){
+  if(saving||!isDirty()||!api)return;
+  const next=clone(state);
+  next.example=false;
+  next.updatedAt=new Date().toISOString();
+  let html;
+  try{html=buildDoc(next);}catch(e){toast('La sauvegarde n’a pas pu être préparée.');return;}
+  saving=true;
+  persistDraft();
+  render();
+  try{
+    await api.publish(html);
+    clearDraft();
+    saved=clone(next);
+    savedJSON=JSON.stringify(saved);
+    state=clone(saved);
+    saving=false;
+    editing=false;
+    render();
+    toast('CV enregistré.');
+  }catch(err){
+    saving=false;
+    const c=err&&err.code;
+    if(c==='conflict')toast('Une version plus récente existe : la page va se recharger. Votre brouillon est conservé.');
+    else if(c==='not_writer'||c==='not_granted'||c==='consent_required'||c==='not_declared'||c==='capability_disabled'||c==='capability_removed'){
+      canEdit=false;editing=false;
+      toast('Cette page est en lecture seule : l’enregistrement n’est pas possible ici.');
+    }
+    else if(c==='rate_limited')toast('Trop d’enregistrements rapprochés. Réessayez dans un instant.');
+    else if(c==='too_large')toast('Le CV est trop volumineux pour être enregistré.');
+    else toast('L’enregistrement a échoué. Vos modifications sont conservées : réessayez.');
+    render();
+  }
+}
+
+/* ---------- Actions ---------- */
+async function copyText(text,btn){
+  try{
+    await navigator.clipboard.writeText(text);
+    toast('Copié.');
+  }catch(e){
+    const li=btn.closest('li');
+    const sel=li&&li.querySelector('.sel');
+    if(sel){
+      const r=document.createRange();r.selectNodeContents(sel);
+      const s=window.getSelection();s.removeAllRanges();s.addRange(r);
+    }
+    toast('Texte sélectionné : copiez-le avec Ctrl+C ou Cmd+C.');
+  }
+}
+
+function handleAction(b){
+  const a=b.dataset.action;
+  if(a==='copy'){copyText(b.dataset.v||'',b);return;}
+  if(!canEdit)return;
+  switch(a){
+    case 'enter-edit':editing=true;render();break;
+    case 'add':openForm(b.dataset.section,null,b);break;
+    case 'edit':openForm(b.dataset.section,b.dataset.id,b);break;
+    case 'edit-profile':openForm('profile',null,b);break;
+    case 'save':save();break;
+    case 'finish':editing=false;confirmDiscard=false;render();break;
+    case 'discard':
+      if(!confirmDiscard){
+        confirmDiscard=true;
+        clearTimeout(discardTimer);
+        discardTimer=setTimeout(()=>{confirmDiscard=false;render();},5000);
+        render();
+      }else{
+        clearTimeout(discardTimer);
+        confirmDiscard=false;
+        state=clone(saved);
+        clearDraft();
+        editing=false;
+        render();
+        toast('Modifications annulées.');
+      }
+      break;
+    case 'reset-empty':
+      state=normalize({example:false,updatedAt:saved.updatedAt});
+      editing=true;
+      persistDraft();
+      render();
+      toast('Page vierge prête : ajoutez vos informations.');
+      break;
+    case 'restore-draft':
+      if(draft){state=normalize(draft.state);draft=null;editing=true;render();toast('Brouillon repris.');}
+      break;
+    case 'ignore-draft':
+      draft=null;clearDraft();render();
+      break;
+  }
+}
+
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-action]');
+  if(b&&$('#app')&&$('#app').contains(b))handleAction(b);
+});
+
+/* ---------- Capacités de la page ---------- */
+async function initCaps(){
+  if(!(window.claude&&typeof window.claude.use==='function'))return;
+  try{api=await window.claude.use('artifact');}catch(e){api=null;}
+  if(!api)return;
+  let u=null;
+  try{u=await window.claude.use('user');}catch(e){u=null;}
+  let ce=false;
+  try{ce=u?await u.canEdit():false;}catch(e){ce=false;}
+  canEdit=ce===true;
+  if(canEdit){
+    const d=readDraft();
+    if(d){
+      let same=false;
+      try{same=JSON.stringify(normalize(d.state))===savedJSON;}catch(e){same=true;}
+      if(same)clearDraft();else draft=d;
+    }
+  }
+  render();
+}
+
+render();
+initCaps();
+})();
+</script>
