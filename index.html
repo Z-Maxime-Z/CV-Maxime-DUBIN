@@ -193,7 +193,9 @@ h1.ph{color:var(--muted)}
 .cur.off{opacity:0}
 .cur .arrow{position:absolute;left:-3px;top:-2px;transition:transform .12s ease,opacity .15s ease;filter:drop-shadow(0 1px 2px rgba(0,0,0,.25))}
 .cur.click .arrow{transform:scale(.8)}
-.cur.typing .arrow{opacity:0}
+.cur.typing .arrow,.cur.writing .arrow{opacity:0}
+.cur .pen{position:absolute;left:-2px;top:-20px;opacity:0;transition:opacity .15s ease;filter:drop-shadow(0 1px 2px rgba(0,0,0,.3))}
+.cur.writing .pen{opacity:1}
 .cur .tag{position:absolute;left:12px;top:16px;padding:.1rem .5rem;border-radius:6px;background:var(--c);color:#fff;font:600 .72rem/1.5 var(--font-body);white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.25)}
 .selbox{position:absolute;border:1.5px solid var(--c);background:color-mix(in srgb,var(--c) 10%,transparent)}
 .selbox i{position:absolute;width:7px;height:7px;background:#fff;border:1.5px solid var(--c)}
@@ -897,6 +899,7 @@ B.stop=function(){
   B.units.forEach(u=>{
     try{
       if(u.hold)u.hold.cancel();
+      if(u.anim)u.anim.cancel();
       u.el.style.clipPath='';
       if(u.typed)u.el.innerHTML=u.orig;
     }catch(e){}
@@ -909,7 +912,7 @@ function makeCursor(d,i){
   const el=document.createElement('div');
   el.className='cur off';
   el.style.setProperty('--c',d.c);
-  el.innerHTML='<svg class="arrow" width="18" height="22" viewBox="0 0 18 22" aria-hidden="true"><path d="M3 2v15l4.2-3.8 2.8 6.4 2.6-1.2-2.7-6.2H15z" fill="var(--c)" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg><span class="tag"></span>';
+  el.innerHTML='<svg class="arrow" width="18" height="22" viewBox="0 0 18 22" aria-hidden="true"><path d="M3 2v15l4.2-3.8 2.8 6.4 2.6-1.2-2.7-6.2H15z" fill="var(--c)" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg><svg class="pen" width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M2 20l1.2-5L15 3.2a2 2 0 0 1 2.8 0l1 1a2 2 0 0 1 0 2.8L7 19z" fill="var(--c)" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/><path d="M2 20l5-1.2-3.8-3.8z" fill="#fff"/></svg><span class="tag"></span>';
   el.querySelector('.tag').textContent=d.name;
   B.layer.appendChild(el);
   const c={el:el,color:d.c,x:window.innerWidth*(.15+.2*i),y:-40,queue:[],busy:false,idle:0,sign:1};
@@ -928,7 +931,7 @@ async function moveTo(cur,tx,ty,id){
 }
 async function dragUnit(cur,u,id){
   const el=u.el;
-  cur.el.classList.remove('typing');
+  cur.el.classList.remove('typing','writing');
   let r=el.getBoundingClientRect();
   await moveTo(cur,r.left,r.top,id);
   r=el.getBoundingClientRect();
@@ -1002,6 +1005,93 @@ async function typeUnit(cur,u,id){
   cur.el.classList.remove('typing');
   el.innerHTML=u.orig;u.typed=false;
 }
+function lineBoxes(el){
+  const rg=document.createRange();
+  rg.selectNodeContents(el);
+  const er=el.getBoundingClientRect();
+  const lines=[];
+  Array.from(rg.getClientRects()).filter(r=>r.width>0&&r.height>0).forEach(r=>{
+    const top=r.top-er.top,bot=r.bottom-er.top,mid=(top+bot)/2;
+    const l=lines.find(L=>Math.abs(L.mid-mid)<r.height*.5);
+    if(l){
+      l.left=Math.min(l.left,r.left-er.left);l.right=Math.max(l.right,r.right-er.left);
+      l.top=Math.min(l.top,top);l.bot=Math.max(l.bot,bot);l.mid=(l.top+l.bot)/2;
+    }else lines.push({left:r.left-er.left,right:r.right-er.left,top:top,bot:bot,mid:mid});
+  });
+  lines.sort((a,b)=>a.top-b.top);
+  lines.forEach((L,i)=>{
+    L.w=L.right-L.left;
+    L.b0=i===0?0:(lines[i-1].bot+L.top)/2;
+    L.b1=i===lines.length-1?er.height:(L.bot+lines[i+1].top)/2;
+  });
+  return lines;
+}
+function inkClip(lines,d){
+  const first=lines[0],last=lines[lines.length-1];
+  const pts=['0px '+first.b0+'px'];
+  let acc=0;
+  lines.forEach(L=>{
+    const w=clamp(d-acc,0,L.w);
+    acc+=L.w;
+    const X=w>=L.w?L.right+8:L.left+w;
+    pts.push(X+'px '+L.b0+'px',X+'px '+L.b1+'px');
+  });
+  pts.push('0px '+last.b1+'px');
+  return 'polygon('+pts.join(',')+')';
+}
+async function inkUnit(cur,u,id){
+  const el=u.el,lines=lineBoxes(el);
+  if(!lines.length){await dragUnit(cur,u,id);return;}
+  let r=el.getBoundingClientRect();
+  cur.el.classList.remove('typing');
+  await moveTo(cur,r.left+lines[0].left,r.top+lines[0].mid,id);
+  cur.el.classList.add('writing');
+  if(u.hold){u.hold.cancel();u.hold=null;}
+  el.style.clipPath=inkClip(lines,0);
+  const total=lines.reduce((a,L)=>a+L.w,0);
+  try{
+    await tween(id,clamp(total*2.2,520,1500),p=>{
+      const e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2,d=e*total;
+      el.style.clipPath=inkClip(lines,d);
+      let acc=0,k=lines.length-1;
+      for(let i=0;i<lines.length;i++){if(d<=acc+lines[i].w){k=i;break;}acc+=lines[i].w;}
+      const L=lines[k],rr=el.getBoundingClientRect();
+      cur.x=rr.left+L.left+clamp(d-acc,0,L.w);
+      cur.y=rr.top+L.bot-(L.bot-L.top)*.15+Math.sin(p*46)*1.6;
+      place(cur);
+    });
+  }finally{cur.el.classList.remove('writing');}
+  el.style.clipPath='';
+  await wait(id,120);
+}
+async function developUnit(cur,u,id){
+  const el=u.el;
+  cur.el.classList.remove('typing','writing');
+  let r=el.getBoundingClientRect();
+  await moveTo(cur,r.left,r.top,id);
+  const sel=document.createElement('div');
+  sel.className='selbox';sel.style.setProperty('--c',cur.color);
+  sel.innerHTML='<i></i><i></i><i></i><i></i>';
+  B.layer.appendChild(sel);
+  cur.el.classList.add('click');
+  if(u.hold){u.hold.cancel();u.hold=null;}
+  u.anim=el.animate([{opacity:0,filter:'blur(14px) saturate(0)',transform:'scale(1.08)'},{opacity:1,filter:'blur(0) saturate(1)',transform:'none'}],{duration:800,easing:'cubic-bezier(.2,.7,.2,1)'});
+  try{
+    await tween(id,900,p=>{
+      const rr=el.getBoundingClientRect();
+      sel.style.left=rr.left+'px';sel.style.top=rr.top+'px';sel.style.width=rr.width+'px';sel.style.height=rr.height+'px';
+      cur.x=rr.left+rr.width*(1-p);cur.y=rr.top+rr.height*(1-p);place(cur);
+      if(p>.3)cur.el.classList.remove('click');
+    });
+  }finally{cur.el.classList.remove('click');sel.remove();}
+}
+async function softUnit(u,id){
+  const el=u.el,m=u.mode;
+  if(u.hold){u.hold.cancel();u.hold=null;}
+  const from=m==='slide'?'translateX(-14px)':m==='pop'?'scale(.82)':'translateY(10px)';
+  u.anim=el.animate([{opacity:0,transform:from},{opacity:1,transform:'none'}],{duration:m==='pop'?240:m==='slide'?300:380,easing:'cubic-bezier(.2,.7,.2,1)'});
+  await wait(id,m==='pop'?70:m==='slide'?110:150);
+}
 function settle(u,id){
   if(id!==B.id)return;
   if(u.hold){u.hold.cancel();u.hold=null;}
@@ -1013,11 +1103,15 @@ function settle(u,id){
   }
 }
 async function perform(cur,u,id){
-  clearTimeout(cur.idle);
-  cur.el.classList.remove('off');
+  const soft=u.mode==='rise'||u.mode==='slide'||u.mode==='pop';
+  if(!soft){clearTimeout(cur.idle);cur.el.classList.remove('off');}
   const r=u.el.getBoundingClientRect();
   if(r.bottom<0||r.top>window.innerHeight){settle(u,id);return;}
-  if(u.mode==='type')await typeUnit(cur,u,id);else await dragUnit(cur,u,id);
+  if(soft)await softUnit(u,id);
+  else if(u.mode==='type')await typeUnit(cur,u,id);
+  else if(u.mode==='ink')await inkUnit(cur,u,id);
+  else if(u.mode==='develop')await developUnit(cur,u,id);
+  else await dragUnit(cur,u,id);
   settle(u,id);
 }
 function pump(cur,id){
@@ -1044,20 +1138,41 @@ B.start=function(){
   const blocks=[];
   const mk=(el,mode)=>{
     if(!el)return null;
-    if(mode==='type'&&!el.textContent.trim())return null;
+    if(mode!=='develop'&&mode!=='drag'&&!el.textContent.trim())return null;
     return {el:el,mode:mode,orig:el.innerHTML,hold:null,done:false,typed:false};
+  };
+  const SOFT='img,.dates,.lcol,h3,.sub,.bul li,.desc,.chip,.item-main.muted,.item-main > .lnk';
+  const itemUnits=(host,us)=>{
+    host.querySelectorAll(SOFT).forEach(el=>{
+      let mode='rise';
+      if(el.matches('img'))mode='develop';
+      else if(el.matches('h3'))mode='ink';
+      else if(el.matches('.desc'))mode='type';
+      else if(el.matches('.bul li'))mode='slide';
+      else if(el.matches('.chip'))mode='pop';
+      us.push(mk(el,mode));
+    });
   };
   const hero=$('.hero',app);
   if(hero){
-    const us=[mk($('.avatar',hero),'drag'),mk($('h1',hero),'type'),mk($('.headline',hero),'type'),mk($('.contact',hero),'drag')].filter(Boolean);
-    if(us.length)blocks.push({el:hero,owner:0,units:us});
+    const us=[];
+    hero.querySelectorAll('.avatar,img').forEach(el=>us.push(mk(el,'develop')));
+    us.push(mk($('h1',hero),'ink'),mk($('.headline',hero),'type'));
+    hero.querySelectorAll('.contact li').forEach(el=>us.push(mk(el,'rise')));
+    const list=us.filter(Boolean);
+    if(list.length)blocks.push({el:hero,owner:0,units:list});
   }
   app.querySelectorAll('.sec').forEach(sec=>{
     const h2=$('.sec-label h2',sec);
     const key=h2&&h2.id?h2.id.slice(2):'';
     const us=[mk(h2,'type')];
     const body=$('.sec-body',sec);
-    if(body)Array.prototype.forEach.call(body.children,ch=>{us.push(mk(ch,ch.classList.contains('about')?'type':'drag'));});
+    if(body)Array.prototype.forEach.call(body.children,ch=>{
+      if(ch.classList.contains('about'))us.push(mk(ch,'type'));
+      else if(ch.classList.contains('empty'))us.push(mk(ch,'rise'));
+      else if(ch.classList.contains('item')&&(key==='languages'||key==='certifications'||key==='links'))us.push(mk(ch,'drag'));
+      else itemUnits(ch,us);
+    });
     const list=us.filter(Boolean);
     if(list.length)blocks.push({el:sec,owner:OWNER[key]!=null?OWNER[key]:0,units:list});
   });
