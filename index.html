@@ -1,4 +1,7 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Site CV</title><meta name="claude:viewport-fit-sides" content="cover"><link id="app-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap"><style id="app-style">
+<title>Site CV</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link id="app-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap">
+<style id="app-style">
 /* Concept : CV en colonnes éditoriales. Libellés de section à gauche, contenu à droite, dates en chasse fixe. */
 :root{
   --bg:#F4F6F7; --surface:#FFFFFF; --ink:#111B22; --muted:#56666F; --line:#DCE3E7;
@@ -6,7 +9,7 @@
   --warn:#B26A00; --warn-soft:#FFF1D6;
   --danger:#B3261E; --danger-ink:#FFFFFF;
   --shadow:0 1px 2px rgba(17,27,34,.06),0 10px 30px rgba(17,27,34,.10);
-  --cur-a:#2F6FED; --cur-b:#C2255C; --cur-c:#B5500A; --cur-d:#6741D9; --caret:#3B82F6;
+  --cur-a:#2F6FED; --cur-b:#C2255C; --cur-c:#B5500A; --cur-d:#6741D9; --cur-e:#0B7A75; --cur-f:#2F7D1F; --cur-g:#8F5B00; --cur-h:#475569; --cur-i:#8E2F7A; --caret:#3B82F6;
   --font-display:'Bricolage Grotesque',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
   --font-body:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
   --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -184,6 +187,11 @@ h1.ph{color:var(--muted)}
 .f-actions{display:flex;gap:.5rem;margin-left:auto}
 
 /* Curseurs qui construisent la page */
+.avatar.has-photo{width:6.5rem;height:6.5rem;overflow:hidden;background:var(--accent-soft)}
+.avatar img{display:block;width:100%;height:100%;object-fit:cover}
+@media (max-width:520px){.avatar.has-photo{width:5rem;height:5rem}}
+.sketch{position:absolute;overflow:hidden;background:#F3EFE6}
+.sketch img{display:block;width:100%;height:100%;object-fit:cover;filter:url(#cv-sketch);mix-blend-mode:multiply}
 .top-actions{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center}
 #cursors{position:fixed;inset:0;z-index:45;pointer-events:none;overflow:hidden}
 .cur{position:absolute;left:0;top:0;opacity:1;transition:opacity .35s ease;will-change:transform}
@@ -208,7 +216,10 @@ h1.ph{color:var(--muted)}
   max-width:calc(100% - 32px);padding:.7rem 1rem;border-radius:10px;background:var(--ink);color:var(--bg);
   font-size:.9rem;box-shadow:var(--shadow);text-align:center;
 }
-</style><div id="app" class="wrap"></div><script type="application/json" id="cv-data">{"v":1,"example":false,"updatedAt":"2026-11-24T14:37:27.724Z","profile":{"name":"Maxime Dubin","headline":"Élève en Bac Pro CIEL, à la recherche d'alternance","location":"Grenoble","phone":"07 49 35 18 69","email":"maximedubin360@gmail.com","summary":"Actuellement élève en classe de seconde professionnelle et à la recherche d'alternance dans le domaine de ma formation, je suis très motivé dans tous les projets que j’entreprends.\nJe sais me distinguer par mon dynamisme et par mon implication ainsi que mon sérieux dans toutes les tâches qui me sont confiées."},"experiences":[{"id":"imwuq3u7wktyb0","role":"Stage en entreprise","org":"Koesio Managed Services","place":"Saint Martin d'Hères","start":"2026-11","current":true,"desc":"Fait :\nFormation pour les outils utilisé \nLa création de script dans des langages différent pour faciliter l’installation de logiciels sur l’ordinateur des clients \nVu :\nTous les postes de l'entreprise\nFonctionnement précis de l'entreprise\nGestion de tickets clients \nInstallation de postes pour des clients"},{"id":"e2","role":"Stage d’observation en entreprise","org":"CSTB","start":"2026","end":"2026","desc":"Gestion de serveurs\nCréation de programmes en Python\nRésolution de problèmes informatiques dans l’entreprise"},{"id":"e1","role":"Stage en entreprise","org":"Keolis Portes des Alpes","start":"2025","end":"2025","desc":"Découverte du monde de l’entreprise\nGestion de carburant sur tableur Excel\nCréation de macros sur Excel"}],"education":[{"id":"d2","degree":"Bac Professionnel CIEL (Cybersécurité, Informatique, Électronique et réseaux)","org":"MFR Saint Egrève","start":"2026-09","current":true,"desc":"1re année : 3 stages en statut lycéen\n2e et 3e année : alternance en contrat d’apprentissage"},{"id":"imwuq651v7xob8","degree":"Formation \"avant de cliquer\"","org":"Koesio Managed Services","place":"Saint martin d'Hères","start":"2026-11","end":"2026-11","desc":"Formation avant de cliquer :\nFormation qui sensibilise au danger du net et de la communication"},{"id":"d1","degree":"Brevet des collèges, mention Bien","org":"Collège le Grand Som","start":"2022","end":"2026"}],"skills":[{"id":"s1","group":"Informatique","items":"Windows (avancé), Pack Office / LibreOffice (intermédiaire), Python (intermédiaire), Blender (débutant), PowerShell (intermédiaire)"},{"id":"s2","group":"Savoir-être","items":"Compréhension (avancé), Autonomie (avancé), Ponctualité (avancé)"}],"languages":[{"id":"l1","name":"Anglais","level":"Avancé"},{"id":"l2","name":"Espagnol","level":"Intermédiaire"}],"certifications":[{"id":"c1","name":"Certification Pix"},{"id":"c2","name":"Evalangue Anglais niveau B1"}],"projects":[{"id":"imwurv7fn9chc6","name":"Créer un R.E.P.O. en RUST","link":"https://github.com/Z-Maxime-Z/R.E.P.O.RUST","desc":"Mon objectif est de me baser du je d'horreur R.E.P.O. et d'en créer un plus performant et moins gourmant en ressources.\nLe langage RUST à été créer pour ça et je compte donc m'en servir.\n\nPour en savoir plus sur le langage RUST :\nhttps://www.youtube.com/watch?v=hbHgIzIbzmQ"},{"id":"imwurwt2jdhbd2","name":"Je mobile","link":"https://github.com/Z-Maxime-Z/Oribit-Rush","desc":"Tout simplement un mélange de \" A Dance of A Fire And Ice\", mais qui se verra plus tard accueillir des nouvelles mécaniques..."}],"links":[],"interests":[{"id":"t1","name":"Informatique"},{"id":"t2","name":"Jeux vidéos"},{"id":"t3","name":"Automobile"},{"id":"t4","name":"Sport"},{"id":"t5","name":"Mécanique"}]}</script><script id="app-code">
+</style>
+<div id="app" class="wrap"></div>
+<script type="application/json" id="cv-data">{"v": 1, "example": false, "updatedAt": "2026-11-24T08:44:31.000Z", "profile": {"name": "Maxime Dubin", "headline": "Élève en Bac Pro CIEL, à la recherche de stages", "location": "", "phone": "", "email": "", "summary": "Actuellement élève en classe de seconde professionnelle et à la recherche de stages dans le domaine de ma formation, je suis très motivé dans tous les projets que j’entreprends.\nJe sais me distinguer par mon dynamisme et par mon implication ainsi que mon sérieux dans toutes les tâches qui me sont confiées."}, "experiences": [{"id": "e2", "role": "Stage d’observation en entreprise", "org": "CSTB", "start": "2026", "end": "2026", "desc": "Gestion de serveurs\nCréation de programmes en Python\nRésolution de problèmes informatiques dans l’entreprise"}, {"id": "e1", "role": "Stage en entreprise", "org": "Keolis Portes des Alpes", "start": "2025", "end": "2025", "desc": "Découverte du monde de l’entreprise\nGestion de carburant sur tableur Excel\nCréation de macros sur Excel"}], "education": [{"id": "d2", "degree": "Bac Professionnel CIEL (Cybersécurité, Informatique, Électronique et réseaux)", "org": "MFR Saint Egrève", "start": "2026", "end": "2029", "desc": "1re année : 3 stages en statut lycéen\n2e et 3e année : alternance en contrat d’apprentissage"}, {"id": "d1", "degree": "Brevet des collèges, mention Bien", "org": "Collège le Grand Som", "start": "2022", "end": "2026"}], "skills": [{"id": "s1", "group": "Informatique", "items": "Windows (avancé), Pack Office / LibreOffice (intermédiaire), Python (débutant), Blender (débutant)"}, {"id": "s2", "group": "Savoir-être", "items": "Compréhension (avancé), Autonomie (avancé), Ponctualité (avancé)"}], "languages": [{"id": "l1", "name": "Anglais", "level": "Intermédiaire"}, {"id": "l2", "name": "Espagnol", "level": "Intermédiaire"}], "certifications": [{"id": "c1", "name": "Certification Pix"}, {"id": "c2", "name": "Evalangue Anglais niveau B1"}], "projects": [], "links": [], "interests": [{"id": "t1", "name": "Informatique"}, {"id": "t2", "name": "Jeux vidéos"}, {"id": "t3", "name": "Automobile"}, {"id": "t4", "name": "Sport"}, {"id": "t5", "name": "Mécanique"}]}</script>
+<script id="app-code">
 (function(){
 'use strict';
 
@@ -309,12 +320,14 @@ const SECTIONS=[
       {k:'name',label:'Langue',type:'text',required:true,ph:'Ex. Anglais'},
       {k:'level',label:'Niveau',type:'select',options:LEVELS,def:'Courant'}
     ]},
-  {key:'certifications',title:'Certifications',layout:'certs',add:'Ajouter une certification',addT:'Nouvelle certification',editT:'Modifier la certification',
+  {key:'certifications',title:'Certifications',layout:'certs',dated:true,add:'Ajouter une certification',addT:'Nouvelle certification',editT:'Modifier la certification',
     empty:'Ajoutez une certification ou une formation courte.',label:it=>it.name||'certification',
     fields:[
       {k:'name',label:'Intitulé',type:'text',required:true},
       {k:'org',label:'Organisme',type:'text'},
-      {k:'date',label:'Date d’obtention',type:'month'}
+      {k:'start',label:'Début',type:'month',half:true},
+      {k:'end',label:'Fin ou date d’obtention',type:'month',half:true},
+      {k:'current',label:'Certification en cours',type:'check'}
     ]},
   {key:'projects',title:'Projets',layout:'projects',add:'Ajouter un projet',addT:'Nouveau projet',editT:'Modifier le projet',
     empty:'Ajoutez un projet personnel, associatif ou professionnel.',label:it=>it.name||'projet',
@@ -337,11 +350,15 @@ const SECTIONS=[
 /* ---------- État ---------- */
 function normalize(s){
   const o=Object.assign({v:1,example:false,updatedAt:''},s||{});
-  const base={};PROFILE_KEYS.forEach(k=>{base[k]='';});
+  const base={};PROFILE_KEYS.forEach(k=>{base[k]='';});base.photo='';
   o.profile=Object.assign(base,o.profile&&typeof o.profile==='object'?o.profile:{});
   SECTIONS.forEach(sec=>{
     if(!Array.isArray(o[sec.key]))o[sec.key]=[];
     o[sec.key]=o[sec.key].filter(x=>x&&typeof x==='object').map(x=>x.id?x:Object.assign({id:uid()},x));
+  });
+  o.certifications=o.certifications.map(x=>{
+    if(x.date&&!x.start&&!x.end){const y=Object.assign({},x,{end:x.date});delete y.date;return y;}
+    return x;
   });
   return o;
 }
@@ -442,7 +459,9 @@ function heroHTML(){
   if(p.location)c.push('<li>'+esc(p.location)+'</li>');
   if(p.email)c.push('<li><span class="sel">'+esc(p.email)+'</span><button type="button" class="copy" data-action="copy" data-v="'+esc(p.email)+'" aria-label="Copier l’adresse e-mail">Copier</button></li>');
   if(p.phone)c.push('<li><span class="sel">'+esc(p.phone)+'</span><button type="button" class="copy" data-action="copy" data-v="'+esc(p.phone)+'" aria-label="Copier le numéro de téléphone">Copier</button></li>');
-  return '<header class="hero"><div class="avatar" aria-hidden="true">'+esc(initials(p.name))+'</div><div>'+
+  const ph=/^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+\/=]+$/.test(p.photo||'')?p.photo:'';
+  const av=ph?'<div class="avatar has-photo"><img src="'+ph+'" alt="Photo de '+esc(p.name||'profil')+'"></div>':'<div class="avatar" aria-hidden="true">'+esc(initials(p.name))+'</div>';
+  return '<header class="hero">'+av+'<div>'+
     '<h1'+(p.name?'':' class="ph"')+'>'+name+'</h1>'+
     (p.headline?'<p class="headline">'+esc(p.headline)+'</p>':'')+
     (c.length?'<ul class="contact">'+c.join('')+'</ul>':'')+
@@ -463,7 +482,7 @@ function itemHTML(sec,it){
     case 'languages':
       return '<article class="item"><div class="lcol">'+esc(it.name)+'</div><div class="item-main muted">'+esc(it.level||'')+'</div>'+btn+'</article>';
     case 'certs':
-      return '<article class="item"><div class="dates">'+esc(fmtDate(it.date))+'</div><div class="item-main"><h3>'+esc(it.name)+'</h3>'+(it.org?'<p class="sub">'+esc(it.org)+'</p>':'')+'</div>'+btn+'</article>';
+      return '<article class="item"><div class="dates">'+esc(range(it))+'</div><div class="item-main"><h3>'+esc(it.name)+'</h3>'+(it.org?'<p class="sub">'+esc(it.org)+'</p>':'')+'</div>'+btn+'</article>';
     case 'projects':
       return '<article class="item plain"><div class="item-main"><h3>'+esc(it.name)+'</h3>'+(it.link?'<p class="sub">'+linkHTML(it.link)+'</p>':'')+(it.desc?'<p class="desc">'+esc(lines(it.desc).join('\n'))+'</p>':'')+'</div>'+btn+'</article>';
     case 'links':
@@ -717,7 +736,7 @@ function submitForm(){
   if(modal.isProfile){
     const p={};
     PROFILE_KEYS.forEach(k=>{p[k]=vals[k]||'';});
-    state.profile=p;
+    state.profile=Object.assign({},state.profile,p);
     afterChange('Profil mis à jour.');
     return;
   }
@@ -866,30 +885,37 @@ document.addEventListener('click',e=>{
 });
 
 /* ---------- Animation : des curseurs construisent la page ---------- */
-const CUR=[{name:'Profil',c:'var(--cur-a)'},{name:'Parcours',c:'var(--cur-b)'},{name:'Compétences',c:'var(--cur-c)'},{name:'Passions',c:'var(--cur-d)'}];
-const OWNER={about:0,experiences:1,education:1,skills:2,languages:2,certifications:2,projects:3,links:3,interests:3};
-const B={id:0,active:false,units:[],cursors:[],layer:null,io:null,left:0,dog:0};
+const CUR=[
+  {name:'Profil',c:'var(--cur-a)'},{name:'Parcours',c:'var(--cur-b)'},{name:'Compétences',c:'var(--cur-c)'},
+  {name:'Passions',c:'var(--cur-d)'},{name:'Titres',c:'var(--cur-e)'},{name:'Dates',c:'var(--cur-f)'},
+  {name:'Style',c:'var(--cur-g)'},{name:'Contenu',c:'var(--cur-h)'},{name:'Relecture',c:'var(--cur-i)'}
+];
+const B={id:0,active:false,units:[],groups:[],cursors:[],layer:null,io:null,left:0,dog:0,speed:1,vel:0,rr:0,onScroll:null,lastY:0,lastT:0};
 const ABORT={aborted:true};
 const reduced=()=>!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
 const place=c=>{c.el.style.transform='translate3d('+c.x+'px,'+c.y+'px,0)';};
-function wait(id,ms){return new Promise((res,rej)=>setTimeout(()=>id===B.id?res():rej(ABORT),ms));}
-function tween(id,ms,fn){
+const gone=el=>{const r=el.getBoundingClientRect();return r.bottom<0||r.top>window.innerHeight;};
+function wait(id,ms){return new Promise((res,rej)=>setTimeout(()=>id===B.id?res():rej(ABORT),ms/B.speed));}
+function tween(id,ms,fn,el){
   return new Promise((res,rej)=>{
-    const t0=performance.now();
+    let last=performance.now(),acc=0;
     (function tick(now){
       if(id!==B.id){rej(ABORT);return;}
-      const p=ms<=0?1:Math.min(1,(now-t0)/ms);
+      acc+=Math.max(0,now-last)*B.speed;last=now;
+      let p=ms<=0?1:Math.min(1,acc/ms);
+      if(el&&p<1&&gone(el))p=1;
       try{fn(p);}catch(e){rej(e);return;}
       if(p<1)requestAnimationFrame(tick);else res();
-    })(t0);
+    })(last);
   });
 }
 B.stop=function(){
   B.id++;B.active=false;
   clearTimeout(B.dog);
   if(B.io){B.io.disconnect();B.io=null;}
+  if(B.onScroll){window.removeEventListener('scroll',B.onScroll);B.onScroll=null;}
   B.units.forEach(u=>{
     try{
       if(u.hold)u.hold.cancel();
@@ -900,7 +926,7 @@ B.stop=function(){
   });
   B.cursors.forEach(c=>clearTimeout(c.idle));
   if(B.layer){B.layer.remove();B.layer=null;}
-  B.units=[];B.cursors=[];B.left=0;
+  B.units=[];B.groups=[];B.cursors=[];B.left=0;B.speed=1;B.vel=0;
 };
 function makeCursor(d,i){
   const el=document.createElement('div');
@@ -909,7 +935,7 @@ function makeCursor(d,i){
   el.innerHTML='<svg class="arrow" width="18" height="22" viewBox="0 0 18 22" aria-hidden="true"><path d="M3 2v15l4.2-3.8 2.8 6.4 2.6-1.2-2.7-6.2H15z" fill="var(--c)" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg><svg class="pen" width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M2 20l1.2-5L15 3.2a2 2 0 0 1 2.8 0l1 1a2 2 0 0 1 0 2.8L7 19z" fill="var(--c)" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/><path d="M2 20l5-1.2-3.8-3.8z" fill="#fff"/></svg><span class="tag"></span>';
   el.querySelector('.tag').textContent=d.name;
   B.layer.appendChild(el);
-  const c={el:el,color:d.c,x:window.innerWidth*(.15+.2*i),y:-40,queue:[],busy:false,idle:0,sign:1};
+  const c={el:el,color:d.c,x:window.innerWidth*(.05+.1*i),y:-40,queue:[],busy:false,idle:0,sign:1};
   place(c);
   return c;
 }
@@ -923,32 +949,36 @@ async function moveTo(cur,tx,ty,id){
     cur.x=x0+dx*e+nx*w;cur.y=y0+dy*e+ny*w;place(cur);
   });
 }
+function makeSel(cur){
+  const sel=document.createElement('div');
+  sel.className='selbox';
+  sel.style.setProperty('--c',cur.color);
+  sel.innerHTML='<i></i><i></i><i></i><i></i>';
+  B.layer.appendChild(sel);
+  return sel;
+}
 async function dragUnit(cur,u,id){
   const el=u.el;
   cur.el.classList.remove('typing','writing');
   let r=el.getBoundingClientRect();
   await moveTo(cur,r.left,r.top,id);
   r=el.getBoundingClientRect();
-  const sel=document.createElement('div');
-  sel.className='selbox';
-  sel.style.setProperty('--c',cur.color);
-  sel.innerHTML='<i></i><i></i><i></i><i></i>';
-  B.layer.appendChild(sel);
+  const sel=makeSel(cur);
   if(u.hold){u.hold.cancel();u.hold=null;}
   el.style.clipPath='inset(0 100% 100% 0)';
   const dur=clamp(260+Math.hypot(r.width,r.height)*.45,380,900);
-  await tween(id,dur,p=>{
-    const e=ease(p),rr=el.getBoundingClientRect();
-    const x=rr.left+rr.width*e,y=rr.top+rr.height*e;
-    cur.x=x;cur.y=y;place(cur);
-    sel.style.left=rr.left+'px';sel.style.top=rr.top+'px';
-    sel.style.width=(rr.width*e)+'px';sel.style.height=(rr.height*e)+'px';
-    const q=((1-e)*100)+'%';
-    el.style.clipPath='inset(0 '+q+' '+q+' 0)';
-  });
-  el.style.clipPath='';
-  await wait(id,140);
-  sel.remove();
+  try{
+    await tween(id,dur,p=>{
+      const e=ease(p),rr=el.getBoundingClientRect();
+      cur.x=rr.left+rr.width*e;cur.y=rr.top+rr.height*e;place(cur);
+      sel.style.left=rr.left+'px';sel.style.top=rr.top+'px';
+      sel.style.width=(rr.width*e)+'px';sel.style.height=(rr.height*e)+'px';
+      const q=((1-e)*100)+'%';
+      el.style.clipPath='inset(0 '+q+' '+q+' 0)';
+    },el);
+    el.style.clipPath='';
+    await wait(id,140);
+  }finally{sel.remove();}
 }
 function caretRect(shown,rest,el){
   const rg=document.createRange();
@@ -973,6 +1003,7 @@ async function typeUnit(cur,u,id){
   const rg=document.createRange();
   rg.setStart(tn,0);rg.setEnd(tn,1);
   const r=rg.getBoundingClientRect();
+  cur.el.classList.remove('writing');
   await moveTo(cur,r.left,r.top+r.height/2,id);
   cur.el.classList.add('click');
   await wait(id,120);
@@ -994,7 +1025,7 @@ async function typeUnit(cur,u,id){
       const cr=caretRect(shown,rest,el);
       caret.style.left=(cr.x-1)+'px';caret.style.top=cr.y+'px';caret.style.height=cr.h+'px';
       cur.x=cr.x+2;cur.y=cr.y+cr.h;place(cur);
-    });
+    },el);
   }finally{caret.remove();}
   cur.el.classList.remove('typing');
   el.innerHTML=u.orig;u.typed=false;
@@ -1036,7 +1067,7 @@ function inkClip(lines,d){
 async function inkUnit(cur,u,id){
   const el=u.el,lines=lineBoxes(el);
   if(!lines.length){await dragUnit(cur,u,id);return;}
-  let r=el.getBoundingClientRect();
+  const r=el.getBoundingClientRect();
   cur.el.classList.remove('typing');
   await moveTo(cur,r.left+lines[0].left,r.top+lines[0].mid,id);
   cur.el.classList.add('writing');
@@ -1053,7 +1084,7 @@ async function inkUnit(cur,u,id){
       cur.x=rr.left+L.left+clamp(d-acc,0,L.w);
       cur.y=rr.top+L.bot-(L.bot-L.top)*.15+Math.sin(p*46)*1.6;
       place(cur);
-    });
+    },el);
   }finally{cur.el.classList.remove('writing');}
   el.style.clipPath='';
   await wait(id,120);
@@ -1061,29 +1092,64 @@ async function inkUnit(cur,u,id){
 async function developUnit(cur,u,id){
   const el=u.el;
   cur.el.classList.remove('typing','writing');
-  let r=el.getBoundingClientRect();
+  const r=el.getBoundingClientRect();
   await moveTo(cur,r.left,r.top,id);
-  const sel=document.createElement('div');
-  sel.className='selbox';sel.style.setProperty('--c',cur.color);
-  sel.innerHTML='<i></i><i></i><i></i><i></i>';
-  B.layer.appendChild(sel);
+  const sel=makeSel(cur);
   cur.el.classList.add('click');
   if(u.hold){u.hold.cancel();u.hold=null;}
   u.anim=el.animate([{opacity:0,filter:'blur(14px) saturate(0)',transform:'scale(1.08)'},{opacity:1,filter:'blur(0) saturate(1)',transform:'none'}],{duration:800,easing:'cubic-bezier(.2,.7,.2,1)'});
+  u.anim.playbackRate=B.speed;
   try{
     await tween(id,900,p=>{
       const rr=el.getBoundingClientRect();
       sel.style.left=rr.left+'px';sel.style.top=rr.top+'px';sel.style.width=rr.width+'px';sel.style.height=rr.height+'px';
       cur.x=rr.left+rr.width*(1-p);cur.y=rr.top+rr.height*(1-p);place(cur);
       if(p>.3)cur.el.classList.remove('click');
-    });
+    },el);
   }finally{cur.el.classList.remove('click');sel.remove();}
+}
+/* Photo : un dessin au crayon se trace ligne par ligne, puis la photo apparaît en couleur */
+async function drawUnit(cur,u,id){
+  const el=u.el,img=el.querySelector('img');
+  if(!img){await developUnit(cur,u,id);return;}
+  cur.el.classList.remove('typing');
+  let r=el.getBoundingClientRect();
+  await moveTo(cur,r.left,r.top,id);
+  const ov=document.createElement('div');
+  ov.className='sketch';
+  ov.style.borderRadius=getComputedStyle(el).borderRadius;
+  ov.appendChild(img.cloneNode());
+  B.layer.appendChild(ov);
+  cur.el.classList.add('writing');
+  const rows=14;
+  r=el.getBoundingClientRect();
+  const w=r.width,h=r.height,lines=[];
+  for(let i=0;i<rows;i++)lines.push({left:0,right:w,w:w,b0:i*h/rows,b1:(i+1)*h/rows});
+  try{
+    await tween(id,clamp(rows*w*1.3,1300,2200),p=>{
+      const rr=el.getBoundingClientRect(),d=p*rows*w;
+      ov.style.left=rr.left+'px';ov.style.top=rr.top+'px';ov.style.width=rr.width+'px';ov.style.height=rr.height+'px';
+      ov.style.clipPath=inkClip(lines,d);
+      const k=Math.min(rows-1,Math.floor(d/w));
+      cur.x=rr.left+(d-k*w);
+      cur.y=rr.top+(k+.5)*rr.height/rows+Math.sin(p*160)*3;
+      place(cur);
+    },el);
+    cur.el.classList.remove('writing');
+    if(u.hold){u.hold.cancel();u.hold=null;}
+    u.anim=el.animate([{opacity:0},{opacity:1}],{duration:700,easing:'ease-out'});
+    u.anim.playbackRate=B.speed;
+    const fade=ov.animate([{opacity:1},{opacity:0}],{duration:700,easing:'ease-in',fill:'forwards'});
+    fade.playbackRate=B.speed;
+    await wait(id,720);
+  }finally{cur.el.classList.remove('writing');ov.remove();}
 }
 async function softUnit(u,id){
   const el=u.el,m=u.mode;
   if(u.hold){u.hold.cancel();u.hold=null;}
   const from=m==='slide'?'translateX(-14px)':m==='pop'?'scale(.82)':'translateY(10px)';
   u.anim=el.animate([{opacity:0,transform:from},{opacity:1,transform:'none'}],{duration:m==='pop'?240:m==='slide'?300:380,easing:'cubic-bezier(.2,.7,.2,1)'});
+  u.anim.playbackRate=B.speed;
   await wait(id,m==='pop'?70:m==='slide'?110:150);
 }
 function settle(u,id){
@@ -1097,14 +1163,14 @@ function settle(u,id){
   }
 }
 async function perform(cur,u,id){
+  if(gone(u.el)){settle(u,id);return;}
   const soft=u.mode==='rise'||u.mode==='slide'||u.mode==='pop';
   if(!soft){clearTimeout(cur.idle);cur.el.classList.remove('off');}
-  const r=u.el.getBoundingClientRect();
-  if(r.bottom<0||r.top>window.innerHeight){settle(u,id);return;}
   if(soft)await softUnit(u,id);
   else if(u.mode==='type')await typeUnit(cur,u,id);
   else if(u.mode==='ink')await inkUnit(cur,u,id);
   else if(u.mode==='develop')await developUnit(cur,u,id);
+  else if(u.mode==='draw')await drawUnit(cur,u,id);
   else await dragUnit(cur,u,id);
   settle(u,id);
 }
@@ -1124,16 +1190,28 @@ function finish(id){
   B.cursors.forEach(c=>c.el.classList.add('off'));
   setTimeout(()=>{if(id===B.id)B.stop();},700);
 }
+function trigger(g,id){
+  if(g.fired||id!==B.id)return;
+  g.fired=true;
+  if(B.io)B.io.unobserve(g.host);
+  const n=B.cursors.length,start=B.rr++%n;
+  let best=null,bp=1e9;
+  for(let k=0;k<n;k++){
+    const c=B.cursors[(start+k)%n],pend=c.queue.length+(c.busy?1:0);
+    if(pend<bp){bp=pend;best=c;}
+  }
+  g.units.forEach(u=>best.queue.push(u));
+  pump(best,id);
+}
 B.start=function(){
   B.stop();
   const app=$('#app');
   if(!app||!('IntersectionObserver' in window)||!Element.prototype.animate)return;
   const id=B.id;
-  const blocks=[];
   const mk=(el,mode)=>{
     if(!el)return null;
-    if(mode!=='develop'&&mode!=='drag'&&!el.textContent.trim())return null;
-    return {el:el,mode:mode,orig:el.innerHTML,hold:null,done:false,typed:false};
+    if(mode!=='develop'&&mode!=='draw'&&mode!=='drag'&&!el.textContent.trim())return null;
+    return {el:el,mode:mode,orig:el.innerHTML,hold:null,anim:null,done:false,typed:false};
   };
   const SOFT='img,.dates,.lcol,h3,.sub,.bul li,.desc,.chip,.item-main.muted,.item-main > .lnk';
   const itemUnits=(host,us)=>{
@@ -1147,56 +1225,84 @@ B.start=function(){
       us.push(mk(el,mode));
     });
   };
+  const groups=[];
+  const add=(host,us)=>{
+    const list=us.filter(Boolean);
+    if(host&&list.length)groups.push({host:host,units:list,fired:false});
+  };
   const hero=$('.hero',app);
   if(hero){
-    const us=[];
-    hero.querySelectorAll('.avatar,img').forEach(el=>us.push(mk(el,'develop')));
-    us.push(mk($('h1',hero),'ink'),mk($('.headline',hero),'type'));
+    const av=$('.avatar',hero);
+    if(av)add(av,[mk(av,av.querySelector('img')?'draw':'develop')]);
+    const txt=hero.lastElementChild;
+    const us=[mk($('h1',hero),'ink'),mk($('.headline',hero),'type')];
     hero.querySelectorAll('.contact li').forEach(el=>us.push(mk(el,'rise')));
-    const list=us.filter(Boolean);
-    if(list.length)blocks.push({el:hero,owner:0,units:list});
+    add(txt,us);
   }
   app.querySelectorAll('.sec').forEach(sec=>{
     const h2=$('.sec-label h2',sec);
     const key=h2&&h2.id?h2.id.slice(2):'';
-    const us=[mk(h2,'type')];
+    add(h2,[mk(h2,'type')]);
     const body=$('.sec-body',sec);
     if(body)Array.prototype.forEach.call(body.children,ch=>{
+      const us=[];
       if(ch.classList.contains('about'))us.push(mk(ch,'type'));
       else if(ch.classList.contains('empty'))us.push(mk(ch,'rise'));
-      else if(ch.classList.contains('item')&&(key==='languages'||key==='certifications'||key==='links'))us.push(mk(ch,'drag'));
+      else if(ch.classList.contains('item')&&(key==='languages'||key==='links'))us.push(mk(ch,'drag'));
       else itemUnits(ch,us);
+      add(ch,us);
     });
-    const list=us.filter(Boolean);
-    if(list.length)blocks.push({el:sec,owner:OWNER[key]!=null?OWNER[key]:0,units:list});
   });
-  if(!blocks.length)return;
+  if(!groups.length)return;
   B.active=true;
   const layer=document.createElement('div');
   layer.id='cursors';layer.setAttribute('aria-hidden','true');
+  layer.innerHTML='<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="cv-sketch" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feColorMatrix type="saturate" values="0"/><feGaussianBlur stdDeviation=".7"/><feConvolveMatrix order="3" kernelMatrix="-1 -1 -1 -1 8 -1 -1 -1 -1" divisor="1" edgeMode="duplicate" preserveAlpha="true"/><feComponentTransfer><feFuncR type="linear" slope="-7" intercept="1"/><feFuncG type="linear" slope="-7" intercept="1"/><feFuncB type="linear" slope="-7" intercept="1"/></feComponentTransfer></filter></svg>';
   document.body.appendChild(layer);
   B.layer=layer;
   B.cursors=CUR.map(makeCursor);
-  blocks.forEach(b=>b.units.forEach(u=>{
+  B.groups=groups;
+  groups.forEach(g=>g.units.forEach(u=>{
     u.hold=u.el.animate([{opacity:0},{opacity:0}],{duration:1000,fill:'both'});
     u.hold.pause();
     B.units.push(u);
   }));
   B.left=B.units.length;
+  B.speed=1;B.vel=0;B.rr=0;
+  B.lastY=window.scrollY;B.lastT=performance.now();
   const map=new Map();
-  blocks.forEach(b=>map.set(b.el,b));
+  groups.forEach(g=>map.set(g.host,g));
   B.io=new IntersectionObserver(es=>{
     es.forEach(e=>{
-      if(!e.isIntersecting||id!==B.id)return;
-      B.io.unobserve(e.target);
-      const b=map.get(e.target);
-      if(!b)return;
-      const cur=B.cursors[b.owner];
-      b.units.forEach(u=>cur.queue.push(u));
-      pump(cur,id);
+      const g=map.get(e.target);
+      if(!g||g.fired||id!==B.id)return;
+      const tall=e.boundingClientRect.height>window.innerHeight*.6;
+      if(e.isIntersecting&&(e.intersectionRatio>=.5||(tall&&e.intersectionRatio>0)))trigger(g,id);
     });
-  },{rootMargin:'0px 0px -6% 0px',threshold:0});
-  blocks.forEach(b=>B.io.observe(b.el));
+  },{threshold:[0,.25,.5,.75,1],rootMargin:'0px 0px -4% 0px'});
+  groups.forEach(g=>B.io.observe(g.host));
+  let queued=false;
+  B.onScroll=()=>{
+    const now=performance.now(),y=window.scrollY,dt=Math.max(8,now-B.lastT);
+    B.vel=B.vel*.6+(Math.abs(y-B.lastY)/dt*1000)*.4;
+    B.lastY=y;B.lastT=now;
+    if(queued)return;
+    queued=true;
+    requestAnimationFrame(()=>{
+      queued=false;
+      if(id!==B.id)return;
+      B.groups.forEach(g=>{if(!g.fired&&g.host.getBoundingClientRect().bottom<0)trigger(g,id);});
+    });
+  };
+  window.addEventListener('scroll',B.onScroll,{passive:true});
+  (function loop(){
+    if(id!==B.id)return;
+    const pend=B.cursors.reduce((a,c)=>a+c.queue.length,0);
+    const target=1+clamp(B.vel/500,0,5)+Math.min(3,Math.max(0,pend-14)*.12);
+    B.speed+=(target-B.speed)*.18;
+    B.vel*=.95;
+    requestAnimationFrame(loop);
+  })();
   B.dog=setTimeout(()=>{if(id===B.id)B.stop();},60000);
 };
 function startBuild(){
@@ -1230,4 +1336,4 @@ async function initCaps(){
 render();
 initCaps();
 })();
-</script></body></html>
+</script>
