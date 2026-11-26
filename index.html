@@ -472,7 +472,7 @@ function topbarHTML(){
   if(saved.example)left='Exemple de CV';
   else if(saved.updatedAt&&fmtLong(saved.updatedAt))left='Mis à jour le '+fmtLong(saved.updatedAt);
   let right='';
-  if(!editing)right='<div class="top-actions"><button type="button" class="btn sm ghost" data-action="replay">Rejouer l’animation</button>'+(canEdit?'<button type="button" class="btn primary" data-action="enter-edit">Modifier mon CV</button>':'')+'</div>';
+  if(!editing)right='<div class="top-actions">'+(canEdit?'<button type="button" class="btn primary" data-action="enter-edit">Modifier mon CV</button>':'')+'</div>';
   if(editing)right='<span class="tag">Mode modification</span>';
   return '<div class="top"><span class="stamp">'+esc(left)+'</span>'+right+'</div>';
 }
@@ -908,7 +908,6 @@ function handleAction(b){
     if(open){menu.hidden=false;b.setAttribute('aria-expanded','true');}
     return;
   }
-  if(a==='replay'){if(!editing&&!modal){window.scrollTo({top:0,behavior:'instant'});B.start();}return;}
   if(!canEdit)return;
   switch(a){
     case 'enter-edit':editing=true;render();break;
