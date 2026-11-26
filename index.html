@@ -1,4 +1,7 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Site CV</title><meta name="claude:viewport-fit-sides" content="cover"><link id="app-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap"><style id="app-style">
+<title>Site CV</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link id="app-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap">
+<style id="app-style">
 /* Concept : CV en colonnes éditoriales. Libellés de section à gauche, contenu à droite, dates en chasse fixe. */
 :root{
   --bg:#F4F6F7; --surface:#FFFFFF; --ink:#111B22; --muted:#56666F; --line:#DCE3E7;
@@ -177,6 +180,12 @@ h1.ph{color:var(--muted)}
 .mp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.5rem}
 .mp3{grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr) minmax(0,1fr)}
 .contact .lnk{text-underline-offset:3px}
+.place{position:relative;display:inline-block}
+.place-btn{font:inherit;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.place-menu{position:absolute;z-index:30;top:calc(100% + .4rem);left:0;min-width:13rem;display:flex;flex-direction:column;padding:.35rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.place-menu .lead{margin:0;padding:.35rem .6rem;font:500 .72rem var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.place-menu a{padding:.5rem .6rem;border-radius:6px;color:var(--ink);text-decoration:none;font-size:.92rem}
+.place-menu a:hover,.place-menu a:focus-visible{background:var(--accent-soft);color:var(--accent)}
 .hint{margin:0;color:var(--muted);font-size:.82rem}
 .err{margin:0;color:var(--danger);font-size:.85rem}
 .fld.chk label{display:flex;align-items:center;gap:.6rem;font-weight:500;font-size:.95rem}
@@ -215,7 +224,10 @@ h1.ph{color:var(--muted)}
   max-width:calc(100% - 32px);padding:.7rem 1rem;border-radius:10px;background:var(--ink);color:var(--bg);
   font-size:.9rem;box-shadow:var(--shadow);text-align:center;
 }
-</style><div id="app" class="wrap"></div><script type="application/json" id="cv-data">{"v":1,"example":false,"updatedAt":"2026-11-25T10:46:09.610Z","profile":{"name":"Maxime Dubin","headline":"Élève en Bac Pro CIEL, à la recherche d'alternance","location":"Saint Laurent du Pont","phone":"07 49 35 18 69","email":"maximedubin360@gmail.com","birth":"2011-03-21","summary":"Actuellement élève en classe de seconde professionnelle et à la recherche d'alternance dans le domaine de ma formation, je suis très motivé dans tous les projets que j’entreprends.\nJe sais me distinguer par mon dynamisme et par mon implication ainsi que mon sérieux dans toutes les tâches qui me sont confiées.","photo":""},"experiences":[{"id":"imwuq3u7wktyb0","role":"Stage en entreprise","org":"Koesio Managed Services","place":"Saint Martin d'Hères","start":"2026-11","current":true,"desc":"Fait :\nFormation pour les outils utilisé \nLa création de script dans des langages différent pour faciliter l’installation de logiciels sur l’ordinateur des clients \nVu :\nTous les postes de l'entreprise\nFonctionnement précis de l'entreprise\nGestion de tickets clients \nInstallation de postes pour des clients"},{"id":"e2","role":"Stage d’observation en entreprise","org":"CSTB","start":"2026","end":"2026","desc":"Gestion de serveurs\nCréation de programmes en Python\nRésolution de problèmes informatiques dans l’entreprise"},{"id":"e1","role":"Stage en entreprise","org":"Keolis Portes des Alpes","start":"2025","end":"2025","desc":"Découverte du monde de l’entreprise\nGestion de carburant sur tableur Excel\nCréation de macros sur Excel"}],"education":[{"id":"d2","degree":"Bac Professionnel CIEL (Cybersécurité, Informatique, Électronique et réseaux)","org":"MFR Saint Egrève","start":"2026-09","current":true,"desc":"1re année : 3 stages en statut lycéen\n2e et 3e année : alternance en contrat d’apprentissage"},{"id":"imwuq651v7xob8","degree":"Formation \"avant de cliquer\"","org":"Koesio Managed Services","place":"Saint martin d'Hères","start":"2026-11","end":"2026-11","desc":"Formation avant de cliquer : Formation qui sensibilise au danger du net et de la communication en entreprise"},{"id":"d1","degree":"Brevet des collèges","org":"Collège le Grand Som","place":"Saint Laurent du Pont","start":"2022-09","end":"2026-06","desc":"Examen passé le : Vendredi 26 juin 2026, Lundi 29 juin 2026, Mardi 30 juin 2026,\n\nMention \"Bien\" obtenu avec une note de 14.51/20"}],"skills":[{"id":"s1","group":"Informatique","items":"Windows (avancé), Pack Office / LibreOffice (intermédiaire), Python (intermédiaire), Blender (débutant), PowerShell (intermédiaire), Claude (intermédiaire), GitHub (Intermédiaire)"},{"id":"s2","group":"Savoir-être","items":"Compréhension (avancé), Autonomie (avancé), Ponctualité (avancé)"}],"languages":[{"id":"l1","name":"Anglais","level":"Avancé"},{"id":"l2","name":"Espagnol","level":"Intermédiaire"}],"certifications":[{"id":"c1","name":"Certification Pix","start":"2026","end":"2026"},{"id":"c2","name":"Evalangue Anglais niveau B1","start":"2026","end":"2026"}],"projects":[{"id":"imwurv7fn9chc6","name":"Créer un R.E.P.O. en RUST","link":"https://github.com/Z-Maxime-Z/R.E.P.O.RUST","desc":"Mon objectif est de me baser du je d'horreur R.E.P.O. et d'en créer un plus performant et moins gourmant en ressources.\nLe langage RUST à été créer pour ça et je compte donc m'en servir.\n\nPour en savoir plus sur le langage RUST :\nhttps://www.youtube.com/watch?v=hbHgIzIbzmQ"},{"id":"imwurwt2jdhbd2","name":"Jeu mobile","link":"https://github.com/Z-Maxime-Z/Oribit-Rush","desc":"Tout simplement une conception de \" A Dance of A Fire And Ice\", mais qui se verra plus tard accueillir des nouvelles mécaniques venant d'autres jeux de rythmes..."}],"links":[{"id":"imwvzzzdi8glm1","label":"GitHub","url":"https://github.com/Z-Maxime-Z"}],"interests":[{"id":"t1","name":"Informatique"},{"id":"t2","name":"Jeux vidéos"},{"id":"t3","name":"Automobile"},{"id":"t4","name":"Sport"},{"id":"t5","name":"Mécanique"}]}</script><script id="app-code">
+</style>
+<div id="app" class="wrap"></div>
+<script type="application/json" id="cv-data">{"v":1,"example":false,"updatedAt":"2026-11-25T10:46:09.610Z","profile":{"name":"Maxime Dubin","headline":"Élève en Bac Pro CIEL, à la recherche d'alternance","location":"Saint Laurent du Pont","phone":"07 49 35 18 69","email":"maximedubin360@gmail.com","birth":"2011-03-21","summary":"Actuellement élève en classe de seconde professionnelle et à la recherche d'alternance dans le domaine de ma formation, je suis très motivé dans tous les projets que j’entreprends.\nJe sais me distinguer par mon dynamisme et par mon implication ainsi que mon sérieux dans toutes les tâches qui me sont confiées.","photo":"","zip":"38380"},"experiences":[{"id":"imwuq3u7wktyb0","role":"Stage en entreprise","org":"Koesio Managed Services","place":"Saint Martin d'Hères","start":"2026-11","current":true,"desc":"Fait :\nFormation pour les outils utilisé \nLa création de script dans des langages différent pour faciliter l’installation de logiciels sur l’ordinateur des clients \nVu :\nTous les postes de l'entreprise\nFonctionnement précis de l'entreprise\nGestion de tickets clients \nInstallation de postes pour des clients"},{"id":"e2","role":"Stage d’observation en entreprise","org":"CSTB","start":"2026","end":"2026","desc":"Gestion de serveurs\nCréation de programmes en Python\nRésolution de problèmes informatiques dans l’entreprise"},{"id":"e1","role":"Stage en entreprise","org":"Keolis Portes des Alpes","start":"2025","end":"2025","desc":"Découverte du monde de l’entreprise\nGestion de carburant sur tableur Excel\nCréation de macros sur Excel"}],"education":[{"id":"d2","degree":"Bac Professionnel CIEL (Cybersécurité, Informatique, Électronique et réseaux)","org":"MFR Saint Egrève","start":"2026-09","current":true,"desc":"1re année : 3 stages en statut lycéen\n2e et 3e année : alternance en contrat d’apprentissage"},{"id":"imwuq651v7xob8","degree":"Formation \"avant de cliquer\"","org":"Koesio Managed Services","place":"Saint martin d'Hères","start":"2026-11","end":"2026-11","desc":"Formation avant de cliquer : Formation qui sensibilise au danger du net et de la communication en entreprise"},{"id":"d1","degree":"Brevet des collèges","org":"Collège le Grand Som","place":"Saint Laurent du Pont","start":"2022-09","end":"2026-06","desc":"Examen passé le : Vendredi 26 juin 2026, Lundi 29 juin 2026, Mardi 30 juin 2026,\n\nMention \"Bien\" obtenu avec une note de 14.51/20"}],"skills":[{"id":"s1","group":"Informatique","items":"Windows (avancé), Pack Office / LibreOffice (intermédiaire), Python (intermédiaire), Blender (débutant), PowerShell (intermédiaire), Claude (intermédiaire), GitHub (Intermédiaire)"},{"id":"s2","group":"Savoir-être","items":"Compréhension (avancé), Autonomie (avancé), Ponctualité (avancé)"}],"languages":[{"id":"l1","name":"Anglais","level":"Avancé"},{"id":"l2","name":"Espagnol","level":"Intermédiaire"}],"certifications":[{"id":"c1","name":"Certification Pix","start":"2026","end":"2026"},{"id":"c2","name":"Evalangue Anglais niveau B1","start":"2026","end":"2026"}],"projects":[{"id":"imwurv7fn9chc6","name":"Créer un R.E.P.O. en RUST","link":"https://github.com/Z-Maxime-Z/R.E.P.O.RUST","desc":"Mon objectif est de me baser du je d'horreur R.E.P.O. et d'en créer un plus performant et moins gourmant en ressources.\nLe langage RUST à été créer pour ça et je compte donc m'en servir.\n\nPour en savoir plus sur le langage RUST :\nhttps://www.youtube.com/watch?v=hbHgIzIbzmQ"},{"id":"imwurwt2jdhbd2","name":"Jeu mobile","link":"https://github.com/Z-Maxime-Z/Oribit-Rush","desc":"Tout simplement une conception de \" A Dance of A Fire And Ice\", mais qui se verra plus tard accueillir des nouvelles mécaniques venant d'autres jeux de rythmes..."}],"links":[{"id":"imwvzzzdi8glm1","label":"GitHub","url":"https://github.com/Z-Maxime-Z"}],"interests":[{"id":"t1","name":"Informatique"},{"id":"t2","name":"Jeux vidéos"},{"id":"t3","name":"Automobile"},{"id":"t4","name":"Sport"},{"id":"t5","name":"Mécanique"}]}</script>
+<script id="app-code">
 (function(){
 'use strict';
 
@@ -278,6 +290,26 @@ function telHref(v){
   const t=String(v||'').replace(/[^\d+]/g,'').replace(/^0(\d{9})$/,'+33$1');
   return t.length>=6?'tel:'+t:'';
 }
+function mapLinks(p){
+  const city=String(p.location||'').trim();
+  if(!city)return [];
+  const zip=/^\d{5}$/.test(String(p.zip||'').trim())?String(p.zip).trim():'';
+  const q=encodeURIComponent((zip?zip+' ':'')+city+', France');
+  const slug=city.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');
+  const out=[{n:'Google Maps',u:'https://www.google.com/maps/search/?api=1&query='+q}];
+  if(zip&&slug)out.push({n:'Mappy',u:'https://fr.mappy.com/plan/'+zip+'-'+slug});
+  out.push({n:'OpenStreetMap',u:'https://www.openstreetmap.org/search?query='+q});
+  out.push({n:'Apple Plans',u:'https://maps.apple.com/?q='+q});
+  out.push({n:'Waze',u:'https://waze.com/ul?q='+q});
+  return out;
+}
+function placeHTML(p){
+  const ls=mapLinks(p);
+  if(!ls.length)return '';
+  return '<span class="place"><button type="button" class="place-btn" data-action="place" aria-haspopup="true" aria-expanded="false" aria-label="'+esc(p.location)+' : ouvrir sur une carte">'+esc(p.location)+'</button>'+
+    '<div class="place-menu" role="menu" hidden><p class="lead">Voir sur une carte</p>'+
+    ls.map(l=>'<a role="menuitem" href="'+esc(l.u)+'" target="_blank" rel="noopener noreferrer">'+esc(l.n)+'</a>').join('')+'</div></span>';
+}
 function linkHTML(u){
   return isHttp(u)?'<a class="lnk" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(shortUrl(u))+'</a>':esc(u);
 }
@@ -287,6 +319,7 @@ const PROFILE={key:'profile',editT:'Modifier le profil',fields:[
   {k:'name',label:'Nom complet',type:'text',required:true,ph:'Prénom Nom'},
   {k:'headline',label:'Titre professionnel',type:'text',ph:'Ex. Chargée de projet digital'},
   {k:'location',label:'Ville',type:'text',half:true,ph:'Ex. Lyon'},
+  {k:'zip',label:'Code postal',type:'text',half:true,ph:'Ex. 69001',hint:'Sert aux liens de carte. Il n’est pas affiché.'},
   {k:'phone',label:'Téléphone',type:'text',half:true,ph:'Ex. 06 12 34 56 78'},
   {k:'email',label:'E-mail',type:'email',ph:'prenom.nom@exemple.fr'},
   {k:'birth',label:'Date de naissance',type:'dob',hint:'Facultatif.'},
@@ -465,7 +498,7 @@ function heroHTML(){
   const p=state.profile;
   const name=p.name?esc(p.name):(editing?'Votre nom':'Mon CV');
   const c=[];
-  if(p.location)c.push('<li>'+esc(p.location)+'</li>');
+  if(p.location)c.push('<li>'+placeHTML(p)+'</li>');
   if(birthText(p.birth))c.push('<li>'+esc(birthText(p.birth))+'</li>');
   if(p.email)c.push('<li><a class="lnk" href="mailto:'+esc(p.email)+'" aria-label="Écrire à '+esc(p.email)+'">'+esc(p.email)+'</a></li>');
   if(p.phone)c.push('<li>'+(telHref(p.phone)?'<a class="lnk" href="'+esc(telHref(p.phone))+'" aria-label="Appeler le '+esc(p.phone)+'">'+esc(p.phone)+'</a>':esc(p.phone))+'</li>');
@@ -869,6 +902,12 @@ async function copyText(text,btn){
 function handleAction(b){
   const a=b.dataset.action;
   if(a==='copy'){copyText(b.dataset.v||'',b);return;}
+  if(a==='place'){
+    const menu=b.parentNode.querySelector('.place-menu'),open=menu.hidden;
+    closePlace();
+    if(open){menu.hidden=false;b.setAttribute('aria-expanded','true');}
+    return;
+  }
   if(a==='replay'){if(!editing&&!modal){window.scrollTo({top:0,behavior:'instant'});B.start();}return;}
   if(!canEdit)return;
   switch(a){
@@ -910,6 +949,24 @@ function handleAction(b){
   }
 }
 
+function closePlace(){
+  document.querySelectorAll('#app .place-menu').forEach(m=>{
+    if(!m.hidden){
+      m.hidden=true;
+      const btn=m.parentNode.querySelector('.place-btn');
+      if(btn)btn.setAttribute('aria-expanded','false');
+    }
+  });
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.place'))closePlace();
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    const open=document.querySelector('#app .place-menu:not([hidden])');
+    if(open){const btn=open.parentNode.querySelector('.place-btn');closePlace();if(btn)btn.focus();}
+  }
+});
 document.addEventListener('click',e=>{
   const b=e.target.closest('[data-action]');
   if(b&&$('#app')&&$('#app').contains(b))handleAction(b);
@@ -1367,4 +1424,4 @@ async function initCaps(){
 render();
 initCaps();
 })();
-</script></body></html>
+</script>
