@@ -1,5 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>CV Maxime DUBIN</title>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>CV Maxime DUBIN</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link id="app-fonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap">
 <style id="app-style">
@@ -187,6 +186,13 @@ h1.ph{color:var(--muted)}
 .place-menu .lead{margin:0;padding:.35rem .6rem;font:500 .72rem var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .place-menu a{padding:.5rem .6rem;border-radius:6px;color:var(--ink);text-decoration:none;font-size:.92rem}
 .place-menu a:hover,.place-menu a:focus-visible{background:var(--accent-soft);color:var(--accent)}
+.linkbar{display:flex;flex-direction:column;align-items:flex-start;gap:.5rem}
+.linkpanel{width:100%;display:flex;flex-direction:column;gap:.6rem;padding:.8rem;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.linkpanel[hidden],.place-menu[hidden]{display:none}
+.lp-row{display:flex;flex-direction:column;gap:.25rem}
+.lp-row label{font:600 .8rem/1.3 var(--font-body)}
+.lp-err{margin:0;color:var(--danger);font-size:.85rem}
+.lp-btns{display:flex;gap:.5rem;flex-wrap:wrap}
 .hint{margin:0;color:var(--muted);font-size:.82rem}
 .err{margin:0;color:var(--danger);font-size:.85rem}
 .fld.chk label{display:flex;align-items:center;gap:.6rem;font-weight:500;font-size:.95rem}
@@ -257,7 +263,7 @@ function fmtLong(iso){
   try{return d.toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});}catch(e){return '';}
 }
 const lines=t=>String(t||'').split(/\r?\n/).map(s=>s.replace(/^\s*[-•*–]\s*/,'').trim()).filter(Boolean);
-const bul=t=>{const l=lines(t);return l.length?'<ul class="bul">'+l.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'';};
+const bul=t=>{const l=lines(t);return l.length?'<ul class="bul">'+l.map(x=>'<li>'+rich(x)+'</li>').join('')+'</ul>':'';};
 const splitList=t=>String(t||'').split(/[,;\n]/).map(s=>s.trim()).filter(Boolean);
 function normUrl(v){
   v=String(v||'').trim();
@@ -311,8 +317,29 @@ function placeHTML(p){
     '<div class="place-menu" role="menu" hidden><p class="lead">Voir sur une carte</p>'+
     ls.map(l=>'<a role="menuitem" href="'+esc(l.u)+'" target="_blank" rel="noopener noreferrer">'+esc(l.n)+'</a>').join('')+'</div></span>';
 }
-function linkHTML(u){
-  return isHttp(u)?'<a class="lnk" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(shortUrl(u))+'</a>':esc(u);
+function linkHTML(u,text){
+  const t=String(text||'').trim();
+  return isHttp(u)?'<a class="lnk" href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(t||shortUrl(u))+'</a>':esc(u);
+}
+/* Texte avec liens : [texte affiché](adresse) ; une adresse seule devient aussi cliquable */
+function rich(t){
+  t=String(t==null?'':t);
+  const re=/\[([^\]\n]{1,200})\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s<>"'\]]+)/g;
+  let out='',last=0,m;
+  while((m=re.exec(t))){
+    out+=esc(t.slice(last,m.index));
+    let url,label,tail='';
+    if(m[2]){url=m[2];label=m[1];}
+    else{
+      url=m[3];
+      const k=/[.,;:!?)]+$/.exec(url);
+      if(k){tail=k[0];url=url.slice(0,-tail.length);}
+      label=shortUrl(url);
+    }
+    out+='<a class="lnk" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>'+esc(tail);
+    last=m.index+m[0].length;
+  }
+  return out+esc(t.slice(last));
 }
 
 /* ---------- Schéma des sections ---------- */
@@ -324,7 +351,7 @@ const PROFILE={key:'profile',editT:'Modifier le profil',fields:[
   {k:'phone',label:'Téléphone',type:'text',half:true,ph:'Ex. 06 12 34 56 78'},
   {k:'email',label:'E-mail',type:'email',ph:'prenom.nom@exemple.fr'},
   {k:'birth',label:'Date de naissance',type:'dob',hint:'Facultatif.'},
-  {k:'summary',label:'Présentation',type:'area',hint:'Quelques lignes : qui vous êtes, ce que vous cherchez.'}
+  {k:'summary',label:'Présentation',type:'area',rich:true,hint:'Quelques lignes : qui vous êtes, ce que vous cherchez.'}
 ]};
 const PROFILE_KEYS=PROFILE.fields.map(f=>f.k);
 
@@ -338,7 +365,7 @@ const SECTIONS=[
       {k:'start',label:'Début',type:'month',required:true,half:true},
       {k:'end',label:'Fin',type:'month',half:true},
       {k:'current',label:'Je suis toujours en poste',type:'check'},
-      {k:'desc',label:'Missions et réalisations',type:'area',hint:'Un point par ligne. Les chiffres et les résultats concrets font la différence.'}
+      {k:'desc',label:'Missions et réalisations',type:'area',rich:true,bul:true,hint:'Un point par ligne. Les chiffres et les résultats concrets font la différence.'}
     ]},
   {key:'education',title:'Formation',layout:'timeline',dated:true,add:'Ajouter une formation',addT:'Nouvelle formation',editT:'Modifier la formation',
     empty:'Ajoutez un diplôme ou une formation.',label:it=>it.degree||'formation',head:it=>it.degree,
@@ -349,7 +376,7 @@ const SECTIONS=[
       {k:'start',label:'Début',type:'month',half:true},
       {k:'end',label:'Fin',type:'month',half:true},
       {k:'current',label:'Formation en cours',type:'check'},
-      {k:'desc',label:'Détails',type:'area',hint:'Option, mention, matières… un point par ligne.'}
+      {k:'desc',label:'Détails',type:'area',rich:true,bul:true,hint:'Option, mention, matières… un point par ligne.'}
     ]},
   {key:'skills',title:'Compétences',layout:'skills',add:'Ajouter une catégorie de compétences',addT:'Nouvelle catégorie',editT:'Modifier la catégorie',
     empty:'Regroupez vos compétences par catégorie (outils, techniques, savoir-faire).',label:it=>it.group||'compétences',
@@ -377,13 +404,15 @@ const SECTIONS=[
     fields:[
       {k:'name',label:'Nom du projet',type:'text',required:true},
       {k:'link',label:'Lien',type:'url',ph:'Ex. monprojet.fr'},
-      {k:'desc',label:'Description',type:'area'}
+      {k:'linkText',label:'Texte du lien',type:'text',ph:'Ex. Voir le projet',hint:'Facultatif. S’affiche à la place de l’adresse.'},
+      {k:'desc',label:'Description',type:'area',rich:true}
     ]},
   {key:'links',title:'Liens',layout:'links',add:'Ajouter un lien',addT:'Nouveau lien',editT:'Modifier le lien',
     empty:'LinkedIn, portfolio, site personnel…',label:it=>it.label||'lien',
     fields:[
       {k:'label',label:'Nom du lien',type:'text',required:true,ph:'Ex. LinkedIn'},
-      {k:'url',label:'Adresse',type:'url',required:true,ph:'Ex. linkedin.com/in/votre-nom'}
+      {k:'url',label:'Adresse',type:'url',required:true,ph:'Ex. linkedin.com/in/votre-nom'},
+      {k:'text',label:'Texte du lien',type:'text',ph:'Ex. Mon profil LinkedIn',hint:'Facultatif. S’affiche à la place de l’adresse.'}
     ]},
   {key:'interests',title:'Centres d’intérêt',layout:'chips',add:'Ajouter un centre d’intérêt',addT:'Nouveau centre d’intérêt',editT:'Modifier le centre d’intérêt',
     empty:'Ajoutez ce qui vous passionne en dehors du travail.',label:it=>it.name||'centre d’intérêt',
@@ -528,9 +557,9 @@ function itemHTML(sec,it){
     case 'certs':
       return '<article class="item"><div class="dates">'+esc(range(it))+'</div><div class="item-main"><h3>'+esc(it.name)+'</h3>'+(it.org?'<p class="sub">'+esc(it.org)+'</p>':'')+'</div>'+btn+'</article>';
     case 'projects':
-      return '<article class="item plain"><div class="item-main"><h3>'+esc(it.name)+'</h3>'+(it.link?'<p class="sub">'+linkHTML(it.link)+'</p>':'')+(it.desc?'<p class="desc">'+esc(lines(it.desc).join('\n'))+'</p>':'')+'</div>'+btn+'</article>';
+      return '<article class="item plain"><div class="item-main"><h3>'+esc(it.name)+'</h3>'+(it.link?'<p class="sub">'+linkHTML(it.link,it.linkText)+'</p>':'')+(it.desc?'<p class="desc">'+rich(lines(it.desc).join('\n'))+'</p>':'')+'</div>'+btn+'</article>';
     case 'links':
-      return '<article class="item"><div class="lcol">'+esc(it.label)+'</div><div class="item-main">'+linkHTML(it.url)+'</div>'+btn+'</article>';
+      return '<article class="item"><div class="lcol">'+esc(it.label)+'</div><div class="item-main">'+linkHTML(it.url,it.text)+'</div>'+btn+'</article>';
   }
   return '';
 }
@@ -541,7 +570,7 @@ function sectionsHTML(){
   if(p.summary||editing){
     h+='<section class="sec" aria-labelledby="h-about"><div class="sec-label"><h2 id="h-about">Profil</h2>'+
        (editing?'<button type="button" class="btn sm" data-action="edit-profile" aria-label="Modifier la présentation">Modifier</button>':'')+
-       '</div><div class="sec-body">'+(p.summary?'<p class="about">'+esc(p.summary)+'</p>':'<p class="empty">Ajoutez une courte présentation : qui vous êtes, ce que vous cherchez.</p>')+'</div></section>';
+       '</div><div class="sec-body">'+(p.summary?'<p class="about">'+rich(p.summary)+'</p>':'<p class="empty">Ajoutez une courte présentation : qui vous êtes, ce que vous cherchez.</p>')+'</div></section>';
   }
   let any=!!(p.summary||p.name||p.headline);
   SECTIONS.forEach(sec=>{
@@ -628,7 +657,15 @@ function fieldHTML(f,val){
     const extra=f.type==='url'?' inputmode="url" autocapitalize="off" spellcheck="false"':(f.type==='email'?' inputmode="email" autocapitalize="off" spellcheck="false"':'');
     ctl='<input id="'+id+'" type="text" autocomplete="off"'+extra+' value="'+esc(val)+'" placeholder="'+esc(f.ph||'')+'" aria-describedby="'+id+'-h '+id+'-e">';
   }
-  return '<div class="'+cls+'" data-k="'+f.k+'"><label for="'+id+'">'+esc(f.label)+req+'</label>'+ctl+hint+err+'</div>';
+  const lb=(f.type==='area'&&f.rich)?
+    '<div class="linkbar"><button type="button" class="btn sm ghost" data-m="link-open" data-for="'+id+'">Insérer un lien</button>'+
+    '<div class="linkpanel" data-panel="'+id+'"'+(f.bul?' data-bul="1"':'')+' hidden>'+
+    '<div class="lp-row"><label for="'+id+'-lt">Texte à afficher</label><input type="text" id="'+id+'-lt" autocomplete="off" placeholder="Ex. Voir ma vidéo"></div>'+
+    '<div class="lp-row"><label for="'+id+'-lu">Adresse du lien</label><input type="text" id="'+id+'-lu" inputmode="url" autocapitalize="off" spellcheck="false" autocomplete="off" placeholder="Ex. youtube.com/…"></div>'+
+    '<p class="lp-err" role="alert" hidden></p>'+
+    '<div class="lp-btns"><button type="button" class="btn sm primary" data-m="link-add" data-for="'+id+'">Insérer</button><button type="button" class="btn sm" data-m="link-close" data-for="'+id+'">Annuler</button></div>'+
+    '</div></div>':'';
+  return '<div class="'+cls+'" data-k="'+f.k+'"><label for="'+id+'">'+esc(f.label)+req+'</label>'+ctl+hint+lb+err+'</div>';
 }
 
 function readField(f){
@@ -727,6 +764,7 @@ function openForm(secKey,id,trigger){
   focusSels=sels.length?sels:null;
   ov.addEventListener('click',onModalClick);
   ov.addEventListener('keydown',onModalKey);
+  ov.addEventListener('focusin',e=>{if(e.target&&e.target.tagName==='TEXTAREA')e.target.dataset.t='1';});
   $('form',ov).addEventListener('submit',e=>{e.preventDefault();submitForm();});
   const cur=$('#f-current',ov);
   if(cur)cur.addEventListener('change',syncCurrent);
@@ -743,11 +781,51 @@ function closeForm(keepFocus){
   if(!keepFocus)refocus();
 }
 
+function linkAction(a,fid){
+  if(!modal)return;
+  const panel=$('[data-panel="'+fid+'"]',modal.ov),ta=$('#'+fid,modal.ov);
+  if(!panel||!ta)return;
+  const lt=$('#'+fid+'-lt',panel),lu=$('#'+fid+'-lu',panel),err=$('.lp-err',panel);
+  const opener=$('[data-m="link-open"][data-for="'+fid+'"]',modal.ov);
+  if(a==='link-open'){
+    if(!panel.hidden){panel.hidden=true;opener.focus();return;}
+    const v=ta.value;
+    let a0=v.length,a1=v.length;
+    if(ta.dataset.t){a0=ta.selectionStart;a1=ta.selectionEnd;}
+    panel.dataset.a0=a0;panel.dataset.a1=a1;
+    const sel=v.slice(a0,a1).trim();
+    lt.value=(sel&&sel.length<=120&&sel.indexOf('\n')<0)?sel:'';
+    lu.value='';err.hidden=true;err.textContent='';
+    panel.hidden=false;
+    (lt.value?lu:lt).focus();
+    return;
+  }
+  if(a==='link-close'){panel.hidden=true;opener.focus();return;}
+  const u=normUrl(lu.value);
+  if(!u){
+    err.textContent=u===''?'Indiquez l’adresse du lien.':'Adresse invalide. Exemple : monsite.fr';
+    err.hidden=false;lu.focus();return;
+  }
+  const text=lt.value.replace(/[\[\]]/g,' ').replace(/\s+/g,' ').trim()||shortUrl(u);
+  const href=u.replace(/\(/g,'%28').replace(/\)/g,'%29');
+  let md='['+text+']('+href+')';
+  const v=ta.value;
+  const a0=Math.min(+panel.dataset.a0||0,v.length),a1=Math.min(Math.max(+panel.dataset.a1||0,a0),v.length);
+  if(a0>0&&!/[\s(]$/.test(v.slice(0,a0)))md=(panel.dataset.bul?'\n':' ')+md;
+  ta.value=v.slice(0,a0)+md+v.slice(a1);
+  const pos=a0+md.length;
+  panel.hidden=true;
+  ta.focus();
+  try{ta.setSelectionRange(pos,pos);}catch(x){}
+  toast('Lien ajouté au texte.');
+}
+
 function onModalClick(e){
   const b=e.target.closest('[data-m]');
   if(!b||!modal)return;
   const a=b.dataset.m;
   if(a==='close'){closeForm();return;}
+  if(a==='link-open'||a==='link-add'||a==='link-close'){linkAction(a,b.dataset.for);return;}
   if(a==='ask-del'){
     const z=$('#del-zone',modal.ov);
     z.innerHTML='<span>Supprimer cet élément ?</span><button type="button" class="btn danger" data-m="del-yes">Oui, supprimer</button><button type="button" class="btn" data-m="del-no">Non</button>';
@@ -771,6 +849,11 @@ function onModalClick(e){
 }
 
 function onModalKey(e){
+  const lp=e.target&&e.target.closest?e.target.closest('.linkpanel'):null;
+  if(lp){
+    if(e.key==='Enter'&&e.target.tagName==='INPUT'){e.preventDefault();linkAction('link-add',lp.dataset.panel);return;}
+    if(e.key==='Escape'){e.preventDefault();e.stopPropagation();linkAction('link-close',lp.dataset.panel);return;}
+  }
   if(e.key==='Escape'){e.preventDefault();closeForm();return;}
   if(e.key!=='Tab'||!modal)return;
   const list=Array.from(modal.ov.querySelectorAll('button,input,select,textarea,a[href]')).filter(el=>!el.disabled&&el.offsetParent!==null);
@@ -1441,6 +1524,4 @@ async function initCaps(){
 render();
 initCaps();
 })();
-</script>
-
-</body></html>
+</script></body></html>
